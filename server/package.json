@@ -1,0 +1,19 @@
+{
+  "name": "my.jsstore",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yacinekadda8/flutter_store_nodjs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yacinekadda8/flutter_store_nodjs/issues"
+  },
+  "homepage": "https://github.com/yacinekadda8/flutter_store_nodjs#readme"
+}
