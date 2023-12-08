@@ -1,8 +1,9 @@
-import 'package:ecommerce_app_with_nodejs/components/constans.dart';
-import 'package:ecommerce_app_with_nodejs/screens/auth_screen.dart';
+
 import 'package:flutter/material.dart';
 
+import 'components/constans.dart';
 import 'router.dart';
+import 'screens/auth_screen.dart';
 
 void main() {
   runApp(const MyApp());
