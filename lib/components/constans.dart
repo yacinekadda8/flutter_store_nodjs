@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 
+const String uri = "http://192.168.1.2:3000";
+
 class GlobalVars {
- static const appBarGradient = LinearGradient(
-  colors: [
-    Color.fromARGB(255, 201, 29, 126),
-    Color.fromARGB(255, 221, 125, 187),
-  ],
-  stops: [0.5, 1.0],
-);
+  static const appBarGradient = LinearGradient(
+    colors: [
+      Color.fromARGB(255, 201, 29, 126),
+      Color.fromARGB(255, 221, 125, 187),
+    ],
+    stops: [0.5, 1.0],
+  );
 
 // static const secondaryColor = Color.fromRGBO(162, 255, 0, 1.0);
 // static const backgroundColor = Colors.white;
 // static const Color greyBackgroundColor = Color(0xffabacd3);
-// static var selectedNavBarColor = const Color.fromARGB(255, 41, 59, 185);
-// static const unselectedNavBarColor = Color.fromARGB(255, 0, 0, 0);
+static var selectedNavBarColor = const Color.fromARGB(255, 41, 59, 185);
+static const unselectedNavBarColor = Color.fromARGB(255, 0, 0, 0);
 
 // from bard
   static const Color brandColor = Color(0xFF0079BD); // Blue
@@ -29,5 +31,4 @@ class GlobalVars {
   static const Color error = Color(0xFFF44336); // Red
   static const Color information = Color(0xFF03A9F4); // Blue
   static const Color warning = Color(0xFFFFC107); // Yellow
-
 }

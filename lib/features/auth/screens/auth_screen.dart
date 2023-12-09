@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../common/widgets/custom_button.dart';
-import '../common/widgets/custom_textfield.dart';
-import '../components/constans.dart';
+import '../../../common/widgets/custom_button.dart';
+import '../../../common/widgets/custom_textfield.dart';
+import '../../../components/constans.dart';
+import '../services/auth_service.dart';
 
 enum Auth { signin, signup }
 
@@ -14,15 +15,34 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-    Auth _auth = Auth.signup;
+  Auth _auth = Auth.signup;
   final _signUpFormsKey = GlobalKey<FormState>();
   final _signInFormsKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  //final AuthService authService = AuthService();
+  final AuthService authService = AuthService();
 
-  @override
+
+
+  void signUpUser() {
+    authService.signUpUser(
+      name: _nameController.text,
+      email: _emailController.text,
+      password: _passwordController.text,
+      context: context,
+    );
+  }
+
+  void signinUser() {
+    authService.signInUser(
+      email: _emailController.text,
+      password: _passwordController.text,
+      context: context,
+    );
+  }
+
+    @override
   void dispose() {
     super.dispose();
     _nameController.dispose();
@@ -30,22 +50,6 @@ class _AuthScreenState extends State<AuthScreen> {
     _passwordController.dispose();
   }
 
-  void signUpUser() {
-    // authService.signUpUser(
-    //   name: _nameController.text,
-    //   email: _emailController.text,
-    //   password: _passwordController.text,
-    //   context: context,
-    // );
-  }
-
-  void signinUser() {
-    // authService.signInUser(
-    //   email: _emailController.text,
-    //   password: _passwordController.text,
-    //   context: context,
-    // );
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,8 +68,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
               ),
               ListTile(
-                tileColor:
-                    _auth == Auth.signup ? GlobalVars.background : null,
+                tileColor: _auth == Auth.signup ? GlobalVars.background : null,
                 title: const Text(
                   'Create Account',
                 ),
@@ -117,8 +120,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   ),
                 ),
               ListTile(
-                tileColor:
-                    _auth == Auth.signin ? GlobalVars.background : null,
+                tileColor: _auth == Auth.signin ? GlobalVars.background : null,
                 title: const Text(
                   'Login',
                 ),
@@ -169,6 +171,5 @@ class _AuthScreenState extends State<AuthScreen> {
         ),
       ),
     );
- 
   }
 }
