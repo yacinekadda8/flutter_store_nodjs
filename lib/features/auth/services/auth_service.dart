@@ -5,7 +5,7 @@ import 'package:flutter_store_nodjs/features/home/screens/home_screen.dart';
 
 import '../../../components/constans.dart';
 import '../../../components/error_handling.dart';
-import '../../../controllers/user_provider.dart';
+import '../../../providers/user_provider.dart';
 import '../../../models/user.dart';
 
 import 'package:provider/provider.dart';

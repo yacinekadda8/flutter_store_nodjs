@@ -48,10 +48,10 @@ class _BottomBarState extends State<BottomBar> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _page, // Currently selected page index
         selectedItemColor:
-            GlobalVars.selectedNavBarColor, // Selected item color
+            MyConstans.selectedNavBarColor, // Selected item color
         unselectedItemColor:
-            GlobalVars.unselectedNavBarColor, // Unselected item color
-        backgroundColor: GlobalVars.background, // Background color
+            MyConstans.unselectedNavBarColor, // Unselected item color
+        backgroundColor: MyConstans.background, // Background color
         iconSize: 28, // Size of icons in the bottom bar
         onTap: updatePage, // Callback function for item tap
         items: [
@@ -74,8 +74,8 @@ class _BottomBarState extends State<BottomBar> {
                   border: Border(
                       top: BorderSide(
                           color: _page == 2
-                              ? GlobalVars.selectedNavBarColor
-                              : GlobalVars.background,
+                              ? MyConstans.selectedNavBarColor
+                              : MyConstans.background,
                           width: borderWidth))),
               // Badge widget with a label and shopping cart icon
               child: const Badge(
@@ -103,8 +103,8 @@ class _BottomBarState extends State<BottomBar> {
             border: Border(
                 top: BorderSide(
                     color: _page == pageNumber
-                        ? GlobalVars.selectedNavBarColor
-                        : GlobalVars.background,
+                        ? MyConstans.selectedNavBarColor
+                        : MyConstans.background,
                     width: borderWidth))),
         child: Icon(icon), // Icon representing the item
       ),

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_store_nodjs/features/auth/providers/auth_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../../common/widgets/custom_button.dart';
 import '../../../common/widgets/custom_textfield.dart';
 import '../../../components/constans.dart';
-import '../services/auth_service.dart';
-
-enum Auth { signin, signup }
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -15,45 +14,11 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-  Auth _auth = Auth.signup;
-  final _signUpFormsKey = GlobalKey<FormState>();
-  final _signInFormsKey = GlobalKey<FormState>();
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final AuthService authService = AuthService();
-
-
-
-  void signUpUser() {
-    authService.signUpUser(
-      name: _nameController.text,
-      email: _emailController.text,
-      password: _passwordController.text,
-      context: context,
-    );
-  }
-
-  void signinUser() {
-    authService.signInUser(
-      email: _emailController.text,
-      password: _passwordController.text,
-      context: context,
-    );
-  }
-
-    @override
-  void dispose() {
-    super.dispose();
-    _nameController.dispose();
-    _emailController.dispose();
-    _passwordController.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
+    var authProvider = Provider.of<AuthProvider>(context);
     return Scaffold(
-      backgroundColor: GlobalVars.background,
+      backgroundColor: MyConstans.background,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -68,50 +33,53 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
               ),
               ListTile(
-                tileColor: _auth == Auth.signup ? GlobalVars.background : null,
+                tileColor: authProvider.auth == Auth.signup
+                    ? MyConstans.background
+                    : null,
                 title: const Text(
                   'Create Account',
                 ),
                 leading: Radio(
-                  activeColor: GlobalVars.secondaryAccent,
+                  activeColor: MyConstans.secondaryAccent,
                   value: Auth.signup,
-                  groupValue: _auth,
+                  groupValue: authProvider.auth,
                   onChanged: (Auth? value) {
                     setState(() {
-                      _auth = value!;
+                      authProvider.auth = value!;
                     });
                   },
                 ),
               ),
-              if (_auth == Auth.signup)
+              if (authProvider.auth == Auth.signup)
                 Container(
                   padding: const EdgeInsets.all(8),
-                  color: GlobalVars.background,
+                  color: MyConstans.background,
                   child: Form(
-                    key: _signUpFormsKey,
+                    key: authProvider.signUpFormsKey,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         CustomTextField(
-                          controller: _nameController,
+                          controller: authProvider.nameController,
                           hintText: "Name",
                         ),
                         const SizedBox(height: 10),
                         CustomTextField(
-                          controller: _emailController,
+                          controller: authProvider.emailController,
                           hintText: "Email",
                         ),
                         const SizedBox(height: 10),
                         CustomTextField(
-                          controller: _passwordController,
+                          controller: authProvider.passwordController,
                           hintText: "Password",
                         ),
                         const SizedBox(height: 10),
                         CustomButton(
                           text: "Sign Up",
                           onPressed: () {
-                            if (_signUpFormsKey.currentState!.validate()) {
-                              signUpUser();
+                            if (authProvider.signUpFormsKey.currentState!
+                                .validate()) {
+                              authProvider.signUpUser(context);
                             }
                           },
                         )
@@ -120,45 +88,48 @@ class _AuthScreenState extends State<AuthScreen> {
                   ),
                 ),
               ListTile(
-                tileColor: _auth == Auth.signin ? GlobalVars.background : null,
+                tileColor: authProvider.auth == Auth.signin
+                    ? MyConstans.background
+                    : null,
                 title: const Text(
                   'Login',
                 ),
                 leading: Radio(
-                  activeColor: GlobalVars.secondaryAccent,
+                  activeColor: MyConstans.secondaryAccent,
                   value: Auth.signin,
-                  groupValue: _auth,
+                  groupValue: authProvider.auth,
                   onChanged: (Auth? value) {
                     setState(() {
-                      _auth = value!;
+                      authProvider.auth = value!;
                     });
                   },
                 ),
               ),
-              if (_auth == Auth.signin)
+              if (authProvider.auth == Auth.signin)
                 Container(
                   padding: const EdgeInsets.all(8),
-                  color: GlobalVars.background,
+                  color: MyConstans.background,
                   child: Form(
-                    key: _signInFormsKey,
+                    key: authProvider.signInFormsKey,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         CustomTextField(
-                          controller: _emailController,
+                          controller: authProvider.emailController,
                           hintText: "Email",
                         ),
                         const SizedBox(height: 10),
                         CustomTextField(
-                          controller: _passwordController,
+                          controller: authProvider.passwordController,
                           hintText: "Password",
                         ),
                         const SizedBox(height: 10),
                         CustomButton(
                           text: "Sign In",
                           onPressed: () {
-                            if (_signInFormsKey.currentState!.validate()) {
-                              signinUser();
+                            if (authProvider.signInFormsKey.currentState!
+                                .validate()) {
+                              authProvider.signinUser(context);
                             }
                           },
                         )

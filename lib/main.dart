@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_store_nodjs/common/widgets/bottom_bar.dart';
-import 'package:flutter_store_nodjs/controllers/user_provider.dart';
+import 'package:flutter_store_nodjs/features/account/providers/account_provider.dart';
+import 'package:flutter_store_nodjs/features/auth/providers/auth_provider.dart';
+import 'package:flutter_store_nodjs/providers/user_provider.dart';
 import 'package:flutter_store_nodjs/features/auth/services/auth_service.dart';
-import 'package:flutter_store_nodjs/features/home/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 import 'components/constans.dart';
 import 'router.dart';
 import 'features/auth/screens/auth_screen.dart';
 
 void main() {
-  runApp(MultiProvider(
-      providers: [ChangeNotifierProvider(create: (context) => UserProvider())],
-      child: const MyApp()));
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (context) => UserProvider()),
+    ChangeNotifierProvider(create: (context) => AuthProvider()),
+    ChangeNotifierProvider(create: (context) => AccountProvider()),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -27,7 +30,6 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     authService.getUserData(context);
-
   }
 
   @override
@@ -36,9 +38,9 @@ class _MyAppState extends State<MyApp> {
         title: 'Sellit',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            scaffoldBackgroundColor: GlobalVars.background,
+            scaffoldBackgroundColor: MyConstans.background,
             colorScheme: const ColorScheme.light(
-              primary: GlobalVars.secondaryAccent,
+              primary: MyConstans.secondaryAccent,
             ),
             useMaterial3: true,
             appBarTheme: const AppBarTheme(

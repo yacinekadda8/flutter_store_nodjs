@@ -17,7 +17,7 @@ class CustomButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(5.0),
           ),
           maximumSize: const Size(double.infinity, double.infinity),
-          backgroundColor: GlobalVars.secondaryAccent,
+          backgroundColor: MyConstans.secondaryAccent,
         ),
         child: Text(
           text,
