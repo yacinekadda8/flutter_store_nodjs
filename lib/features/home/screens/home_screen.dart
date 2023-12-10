@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
           // ),
           const HomeCategories(),
           //Text(user.toJson()),
-          Text(
+          const Text(
             'Todays daily deals',
             style: TextStyle(
               fontSize: 28,
@@ -45,20 +45,73 @@ class HomeScreen extends StatelessWidget {
             height: 200,
             child: Row(
               children: [
-                Image.network(
-                  'https://m.media-amazon.com/images/W/MEDIAX_792452-T1/images/I/81Svdy-MGbL._AC_SX425_.jpg',
-                  width: 200,
-                  height: 200,
-                  fit: BoxFit.cover,
-                ),
-                Text(
-                  'Acer Swift Go Intel Evo Thin & Light Premium',
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                Container(
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(5)),
+                  child: Image.network(
+                    'https://m.media-amazon.com/images/W/MEDIAX_792452-T1/images/I/81Svdy-MGbL._AC_SX425_.jpg',
+                    width: 200,
+                    height: 200,
+                    fit: BoxFit.cover,
                   ),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 2.5,
+                      child: const Text(
+                        'Acer Swift Go Intel Evo Thin & Light Premium',
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    const Text(
+                      'PRICE: 999\$',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const Text(
+                      'OLd PRICE: 1799\$',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.lineThrough,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          color: MyConstans.brandColor,
+                          child: const Text(
+                            'Deal -28%',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 20.0),
+                        const Row(
+                          children: [
+                            Text(
+                              "4.7",
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                            Icon(Icons.star, color: Colors.orangeAccent)
+                          ],
+                        )
+                      ],
+                    )
+                  ],
                 ),
               ],
             ),
