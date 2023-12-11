@@ -4,6 +4,7 @@ import 'package:flutter_store_nodjs/models/user.dart';
 import 'package:flutter_store_nodjs/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../widgets/account_appbar.dart';
 import '../widgets/account_btn.dart';
 import '../widgets/orders.dart';
 import '../widgets/top_buttons.dart';
@@ -25,7 +26,7 @@ class _AccountState extends State<Account> {
         //crossAxisAlignment: CrossAxisAlignment.start,
         //mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const MyAppBar(),
+          const AccountAppBar(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Column(
@@ -36,36 +37,6 @@ class _AccountState extends State<Account> {
                 const TopButtons(),
                 const SizedBox(height: 20),
                 const Orders(),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class MyAppBar extends StatelessWidget {
-  const MyAppBar({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 80,
-      padding: const EdgeInsets.only(top: 30, left: 10, right: 10),
-      color: MyConstans.secondaryAccent,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Image.asset(MyConstans.logo, height: 30, width: 90),
-          //const Expanded(child: SizedBox()),
-          const SizedBox(
-            child: Row(
-              children: [
-                Icon(Icons.notifications_outlined, size: 40),
-                Icon(Icons.search_outlined, size: 40),
               ],
             ),
           )
