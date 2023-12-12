@@ -3,7 +3,7 @@ import 'package:flutter_store_nodjs/components/constans.dart';
 import 'package:flutter_store_nodjs/features/account/providers/account_provider.dart';
 import 'package:provider/provider.dart';
 
-import 'product.dart';
+import 'single_product.dart';
 
 class Orders extends StatelessWidget {
   const Orders({
@@ -47,7 +47,8 @@ class Orders extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemCount: accountProvider.orders.length,
               itemBuilder: ((context, index) {
-                return Product(accountProvider: accountProvider, index: index);
+                return SingleProduct(
+                    accountProvider: accountProvider, index: index);
               })),
         )
       ],

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../components/constans.dart';
 import '../providers/account_provider.dart';
 
-class Product extends StatelessWidget {
-  const Product({
+class SingleProduct extends StatelessWidget {
+  const SingleProduct({
     super.key,
     required this.accountProvider,
     required this.index,

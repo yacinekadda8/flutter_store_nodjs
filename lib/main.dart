@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_store_nodjs/common/widgets/bottom_bar.dart';
 import 'package:flutter_store_nodjs/features/account/providers/account_provider.dart';
+import 'package:flutter_store_nodjs/features/admin/providers/products_provider.dart';
 import 'package:flutter_store_nodjs/features/admin/screens/admin_screen.dart';
 import 'package:flutter_store_nodjs/features/auth/providers/auth_provider.dart';
 import 'package:flutter_store_nodjs/providers/user_provider.dart';
@@ -15,6 +16,7 @@ void main() {
     ChangeNotifierProvider(create: (context) => UserProvider()),
     ChangeNotifierProvider(create: (context) => AuthProvider()),
     ChangeNotifierProvider(create: (context) => AccountProvider()),
+    ChangeNotifierProvider(create: (context) => ProductsProvider()),
   ], child: const MyApp()));
 }
 

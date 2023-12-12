@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 //import 'package:file_picker/file_picker.dart';
@@ -9,7 +12,7 @@ void showSnackBar(BuildContext context, String text) {
     ),
   );
 }
-/*
+
 Future<List<File>> pickImages() async {
   List<File> images = [];
   try {
@@ -26,4 +29,4 @@ Future<List<File>> pickImages() async {
     debugPrint(e.toString());
   }
   return images;
-} */
+}
