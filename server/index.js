@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const dotenv = require("dotenv");
 // Import module from files
 const authRouter = require('./routes/auth');
+const adminRouter = require('./routes/admin');
 
 dotenv.config();
 // Set variables - Create instances
@@ -13,6 +14,7 @@ const app = express();
 // Use middlewares
 app.use(express.json());
 app.use(authRouter);
+app.use(adminRouter);
 
 //Connect to MongoDB
 mongoose.connect(MONGODB_URI).then(()=>{

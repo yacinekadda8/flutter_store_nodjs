@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 // Import Module and Middlewares from Files
 const authRouter = express.Router();
 const User = require("../models/user"); // Assuming you have a User model defined in the 'user' file
-const myAuth = require("../middlewares/auth");
+const myAuth = require("../middlewares/auth_middleware");
 
 
 // ------- Register
@@ -89,48 +89,7 @@ authRouter.get('/', myAuth, async  (req, res) => {
    const user = await User.findById(req.user);
    res.json({ ...user._doc, token: req.token });
 });
-// authRouter.post("/isValidToken", async (req, res) => {
-//   try {
-//     // Extract the JWT (JSON Web Token) from the request headers
-//     const token = req.header("app-auth-token");
-//     // If no token is provided, return false
-//     if (!token) return res.json(false);
-//     // Verify the authenticity of the token using the JWT library and secret key
-//     const verified = jwt.verify(token, "defaultSecretKey");
-//     // If token verification fails, return false
-//     if (!verified) {
-//       return res.json(false);
-//     } else {
-//       // Find the user associated with the verified user ID
-//       const user = await User.findById(verified.id);
-//       // If no user is found, return false
-//       if (!user) {
-//         return res.json(false);
-//       } else {
-//         // If everything is valid, return true
-//         res.json(true);
-//       }
-//     }
-//   } catch (e) {
-//     // Handle any unexpected errors and return a 500 Internal Server Error response
-//     res.status(500).json({ error: e.message });
-//   }
-// });
-// // Get User Data Endpoint with Authentication Middleware
-// authRouter.get("/", auth, async (req, res) => {
-//   // Find the user data associated with the authenticated user ID
-//   const user = await User.findById(req.user);
-//   // Return user data along with the token in the response
-//   res.json({ ...user._doc, token: req.token });
-// });
 
-// // Helper function to validate email format
-// function validateEmail(email) {
-//     // Add your email validation logic here
-//     // For a simple check, you can use a regular expression
-//     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//     return emailRegex.test(email);
-// }
 
 // Export the authRouter for use in other parts of your application
 module.exports = authRouter;

@@ -2,18 +2,23 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_store_nodjs/components/utils.dart';
+import 'package:image_picker/image_picker.dart';
+
+import '../services/admin_services.dart';
 
 class ProductsProvider extends ChangeNotifier {
-  TextEditingController productTitleController = TextEditingController();
+  TextEditingController productNameController = TextEditingController();
   TextEditingController productDescriptionController = TextEditingController();
   TextEditingController productPriceController = TextEditingController();
   TextEditingController productQuantityController = TextEditingController();
-
   List<File> images = [];
+  final addProductGlobalkey = GlobalKey<FormState>();
+  AdminServices adminServices = AdminServices();
   List<String> categoriesNames = [
     'Mobiles',
-    'Laptop',
     'Computers',
+    'Laptop',
+    'Pc and Laptop accessories',
     'Tablets',
     'Watches'
   ];
@@ -26,13 +31,27 @@ class ProductsProvider extends ChangeNotifier {
 
   void selectImages() async {
     var res = await pickImages();
-    images = res;
+    images = res.map((xfile) => File(xfile.path)).toList();
     notifyListeners();
+  }
+
+  void addProduct({required context}) {
+    if (addProductGlobalkey.currentState!.validate() || images.isNotEmpty) {
+      adminServices.addProduct(
+        context: context,
+        name: productNameController.text,
+        description: productNameController.text,
+        category: defaultCategory,
+        quantity: int.parse(productPriceController.text),
+        price: double.parse(productQuantityController.text),
+        images: images,
+      );
+    }
   }
 
   @override
   void dispose() {
-    productTitleController.dispose();
+    productNameController.dispose();
     productDescriptionController.dispose();
     productPriceController.dispose();
     productQuantityController.dispose();

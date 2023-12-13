@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 const String uri = "http://192.168.1.2:3000";
+//const String uri = "http://10.0.2.2:3000";
 
 class MyConstans {
   static const String logo = 'assets/images/amazon-logo.png';
@@ -34,6 +35,7 @@ class MyConstans {
   static const Color information = Color(0xFF03A9F4); // Blue
   static const Color warning = Color(0xFFFFC107); // Yellow
 
+
   static const List carouselImages = [
     'https://m.media-amazon.com/images/W/MEDIAX_792452-T1/images/I/614rDhrz2-L._SX1500_.jpg',
     'https://images.unsplash.com/photo-1701932521067-ab10be5e9e2a?q=80&w=1335&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -43,6 +45,10 @@ class MyConstans {
   ];
 
   static const List<Map<String, String>> categories = [
+        {
+      'title': 'Phones',
+      'image': 'assets/images/categories/phones.png',
+    },
     {
       'title': 'Computers',
       'image': 'assets/images/categories/computer.png',
@@ -52,8 +58,8 @@ class MyConstans {
       'image': 'assets/images/categories/laptop.png',
     },
     {
-      'title': 'Phones',
-      'image': 'assets/images/categories/phones.png',
+      'title': 'Pc and Laptop accessories',
+      'image': 'assets/images/categories/pc-and-laptop-accessories.jpg',
     },
     {
       'title': 'Tablets',
