@@ -89,7 +89,7 @@ class HomeScreen extends StatelessWidget {
                     Row(
                       children: [
                         Container(
-                          color: MyConstans.brandColor,
+                          color: MyConstans.redColorMain,
                           child: const Text(
                             'Deal -28%',
                             style: TextStyle(

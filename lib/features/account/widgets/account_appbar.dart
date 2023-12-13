@@ -11,7 +11,7 @@ class AccountAppBar extends StatelessWidget {
     return Container(
       height: 80,
       padding: const EdgeInsets.only(top: 30, left: 10, right: 10),
-      color: MyConstans.secondaryAccent,
+      color: MyConstans.redColorMain,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

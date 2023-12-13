@@ -39,7 +39,7 @@ dependencies:
   provider: ^6.1.1
   shared_preferences: ^2.2.2
   carousel_slider: ^4.2.1
-  file_picker: ^6.1.1
+  #file_picker: ^6.1.1
   cloudinary_public: ^0.23.1
   image_picker: ^1.0.5
 

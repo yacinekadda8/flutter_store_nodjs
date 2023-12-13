@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_store_nodjs/components/utils.dart';
-import 'package:image_picker/image_picker.dart';
 
 import '../services/admin_services.dart';
 
@@ -24,6 +23,7 @@ class ProductsProvider extends ChangeNotifier {
   ];
   String defaultCategory = 'Mobiles';
 
+
   onCategoryChanged(String? newValue) {
     defaultCategory = newValue!;
     notifyListeners();
@@ -42,8 +42,8 @@ class ProductsProvider extends ChangeNotifier {
         name: productNameController.text,
         description: productNameController.text,
         category: defaultCategory,
-        quantity: int.parse(productPriceController.text),
-        price: double.parse(productQuantityController.text),
+        quantity: productPriceController.text,
+        price: productQuantityController.text,
         images: images,
       );
     }

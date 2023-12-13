@@ -7,7 +7,6 @@ import 'package:flutter_store_nodjs/components/constans.dart';
 import 'package:flutter_store_nodjs/features/admin/providers/products_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../widgets/myadmin_appbar.dart';
 
 class AddProductScreen extends StatefulWidget {
   static const String routeName = '/add-product-screen';
@@ -24,8 +23,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: MyConstans.brandColor,
-        title: Text(
+        backgroundColor: MyConstans.redColorMain,
+        title: const Text(
           "Add a new Product",
           style: TextStyle(color: MyConstans.text, fontWeight: FontWeight.bold),
         ),
@@ -74,7 +73,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         items: productProvider.images.map((i) {
                           return Builder(
                               builder: (BuildContext context) => Image.file(
-                                 File(i.path),
+                                    File(i.path),
                                     width: MediaQuery.of(context).size.width,
                                     height: 200,
                                     fit: BoxFit.cover,

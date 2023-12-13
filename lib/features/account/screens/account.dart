@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_store_nodjs/components/constans.dart';
-import 'package:flutter_store_nodjs/models/user.dart';
 import 'package:flutter_store_nodjs/providers/user_provider.dart';
 import 'package:provider/provider.dart';
-
 import '../widgets/account_appbar.dart';
-import '../widgets/account_btn.dart';
 import '../widgets/orders.dart';
 import '../widgets/top_buttons.dart';
 import '../widgets/user_info.dart';

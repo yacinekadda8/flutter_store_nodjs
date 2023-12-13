@@ -40,7 +40,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   'Create Account',
                 ),
                 leading: Radio(
-                  activeColor: MyConstans.secondaryAccent,
+                  activeColor: MyConstans.redColorMain,
                   value: Auth.signup,
                   groupValue: authProvider.auth,
                   onChanged: (Auth? value) {
@@ -95,7 +95,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   'Login',
                 ),
                 leading: Radio(
-                  activeColor: MyConstans.secondaryAccent,
+                  activeColor: MyConstans.redColorMain,
                   value: Auth.signin,
                   groupValue: authProvider.auth,
                   onChanged: (Auth? value) {

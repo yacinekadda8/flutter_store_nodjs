@@ -30,7 +30,7 @@ class Orders extends StatelessWidget {
             Text(
               'See all',
               style: TextStyle(
-                color: MyConstans.primaryAccent,
+                color: MyConstans.yellowPrimary,
                 fontSize: 18,
               ),
             )

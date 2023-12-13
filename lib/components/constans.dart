@@ -8,8 +8,8 @@ class MyConstans {
   static const String avatar = 'assets/images/unknown-user-avatar.png';
   static const appBarGradient = LinearGradient(
     colors: [
-      Color.fromARGB(255, 241, 44, 87),
-      Color.fromARGB(255, 235, 52, 92),
+      Color(0xFFF12C57),
+      Color(0xFFEB345C),
     ],
     stops: [0.5, 1.0],
   );
@@ -17,24 +17,22 @@ class MyConstans {
 // static const secondaryColor = Color.fromRGBO(162, 255, 0, 1.0);
 // static const backgroundColor = Colors.white;
 // static const Color greyBackgroundColor = Color(0xffabacd3);
-  static const selectedNavBarColor = Color(0xFFD46F10);
-  static const unselectedNavBarColor = Color(0xFF524D44);
 // from bard
-  static const Color brandColor = Color(0xFFBD0058); // Blue
-  static const Color primaryAccent = Color(0xFFD46F10); // Orange
-  static const Color secondaryAccent = Color(0xFFDF2B52); // Light Blue
+  static const Color redColorMain = Color(0xFFe1233c); //
+  static const Color yellowPrimary = Color(0xFFf9bc01); // unselected
+  static const Color lightBlueSecondary = Color(0xFF5a80ee); // selected
+  //static const Color darkBlueSecondary = Color(0xFF213ea9); //  
 
-  static const Color background = Color(0xFFFFFFFF); // White
-  static const Color surface = Color(0xFFF2F2F2); // Light Grey
+  static const Color background = Color(0xFFFFFFFF); //
+  static const Color surface = Color(0xFFF2F2F2); //
   static const Color text = Color(0xFF242323); // Black
-  static const Color textLight = Color.fromARGB(255, 65, 64, 64); // Black
+  static const Color textLight = Color(0xFF414040); // Black
   static const Color border = Color(0xFF242323); // Light Grey
 
   static const Color success = Color(0xFF4CAF50); // Green
   static const Color error = Color(0xFFF44336); // Red
   static const Color information = Color(0xFF03A9F4); // Blue
   static const Color warning = Color(0xFFFFC107); // Yellow
-
 
   static const List carouselImages = [
     'https://m.media-amazon.com/images/W/MEDIAX_792452-T1/images/I/614rDhrz2-L._SX1500_.jpg',
@@ -45,7 +43,7 @@ class MyConstans {
   ];
 
   static const List<Map<String, String>> categories = [
-        {
+    {
       'title': 'Phones',
       'image': 'assets/images/categories/phones.png',
     },

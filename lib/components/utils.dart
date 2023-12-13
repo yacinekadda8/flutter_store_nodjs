@@ -14,20 +14,21 @@ void showSnackBar(BuildContext context, String text) {
   );
 }
 
-
 Future<List<XFile>> pickImages() async {
   List<XFile> images = [];
+  final ImagePicker picker = ImagePicker();
   try {
-    List<XFile>? pickedImages = await ImagePicker().pickMultiImage(
-      //maxImages: 5, // Set the maximum number of images to be picked
-      //imageQuality: 
-    );
+    List<XFile>? pickedImages = await picker.pickMultiImage(
+        //maxImages: 5, // Set the maximum number of images to be picked
+        //imageQuality:
 
-    if (pickedImages != null && pickedImages.isNotEmpty) {
+        );
+
+    if (pickedImages.isNotEmpty) {
       images.addAll(pickedImages);
     }
   } catch (e) {
-    print('Error picking images: $e');
+    debugPrint('Error picking images: $e');
   }
   return images;
 }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../../components/constans.dart';
@@ -13,7 +12,7 @@ class MyHomeAppBar extends StatelessWidget {
     return Container(
       height: 95,
       padding: const EdgeInsets.only(top: 30, left: 15, right: 15, bottom: 10),
-      color: MyConstans.secondaryAccent,
+      color: MyConstans.redColorMain,
       child: Container(
         padding: const EdgeInsets.only(top: 5),
         decoration: BoxDecoration(
@@ -24,15 +23,15 @@ class MyHomeAppBar extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(left: 8.0, right: 8.0),
           child: TextFormField(
-            decoration: InputDecoration(
-              prefixIcon: const Icon(Icons.search_outlined, size: 30),
+            decoration: const InputDecoration(
+              prefixIcon: Icon(Icons.search_outlined, size: 30),
               hintText: 'Search Amazon',
-              hintStyle: const TextStyle(fontSize: 18),
+              hintStyle: TextStyle(fontSize: 18),
               border: InputBorder.none,
-              suffixIcon: Container(
+              suffixIcon: SizedBox(
                 //color: Colors.amber,
                 width: 70,
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Icon(Icons.image_search_outlined, size: 30),

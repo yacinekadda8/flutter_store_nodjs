@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_store_nodjs/common/widgets/bottom_bar.dart';
 import 'package:flutter_store_nodjs/features/account/providers/account_provider.dart';
 import 'package:flutter_store_nodjs/features/admin/providers/products_provider.dart';
 import 'package:flutter_store_nodjs/features/admin/screens/admin_screen.dart';
@@ -43,7 +42,7 @@ class _MyAppState extends State<MyApp> {
         theme: ThemeData(
             scaffoldBackgroundColor: MyConstans.background,
             colorScheme: const ColorScheme.light(
-              primary: MyConstans.secondaryAccent,
+              primary: MyConstans.lightBlueSecondary,
             ),
             useMaterial3: true,
             appBarTheme: const AppBarTheme(

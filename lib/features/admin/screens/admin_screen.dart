@@ -37,7 +37,7 @@ class _AdminScreenState extends State<AdminScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
+      appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: MyAdminAppbar(),
       ),
@@ -45,10 +45,8 @@ class _AdminScreenState extends State<AdminScreen> {
       // Bottom Navigation Bar
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _page, // Currently selected page index
-        selectedItemColor:
-            MyConstans.selectedNavBarColor, // Selected item color
-        unselectedItemColor:
-            MyConstans.unselectedNavBarColor, // Unselected item color
+        selectedItemColor: MyConstans.lightBlueSecondary, // Selected item color
+        unselectedItemColor: MyConstans.yellowPrimary, // Unselected item color
         backgroundColor: MyConstans.background, // Background color
         iconSize: 28, // Size of icons in the bottom bar
         onTap: updatePage, // Callback function for item tap
@@ -85,7 +83,7 @@ class _AdminScreenState extends State<AdminScreen> {
             border: Border(
                 top: BorderSide(
                     color: _page == pageNumber
-                        ? MyConstans.selectedNavBarColor
+                        ? MyConstans.lightBlueSecondary // selected
                         : MyConstans.background,
                     width: borderWidth))),
         child: Icon(icon), // Icon representing the item
