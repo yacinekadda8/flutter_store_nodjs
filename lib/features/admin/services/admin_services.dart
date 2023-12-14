@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 
 import '../../../components/error_handling.dart';
 import '../../../components/utils.dart';
+import '../../../models/product_model.dart';
 
 class AdminServices {
 //   Future<List<Product>> getAllProduct() async {
@@ -36,11 +37,11 @@ class AdminServices {
 //   }
 // }
 
-  Future<List<Product>> getAllProduct(
+  Future<List<ProductModel>> getAllProduct(
     BuildContext context,
   ) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
-    List<Product> products = [];
+    List<ProductModel> products = [];
     try {
       http.Response response = await http.get(
         Uri.parse('$uri/admin/get-products'),
@@ -56,7 +57,7 @@ class AdminServices {
           context: context,
           onSuccess: () {
             for (int i = 0; i < jsonDecode(response.body).length; i++) {
-              products.add(Product.fromJson(
+              products.add(ProductModel.fromJson(
                 jsonDecode(response.body)[i],
               ));
             }
@@ -76,8 +77,8 @@ class AdminServices {
     required String name,
     required String description,
     required String category,
-    required String quantity,
-    required String price,
+    required int quantity,
+    required int price,
     required List<File> images,
   }) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false).user;
@@ -92,18 +93,18 @@ class AdminServices {
         ));
         imgsUrl.add(response.secureUrl);
       }
-      Product product = Product(
+      ProductModel product = ProductModel(
           name: name,
           description: description,
           category: category,
-          price: double.parse(price),
-          quantity: int.parse(quantity),
+          price: price,
+          quantity: quantity,
           images: imgsUrl);
 
       http.Response res = await http.post(
         Uri.parse("$uri/admin/add-product"),
-        body: product.toJson(),
-        headers: {
+        body: json.encode(product.toJson()),
+        headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           "app-auth-token": userProvider.token.toString()
         },
@@ -124,3 +125,4 @@ class AdminServices {
     }
   }
 }
+

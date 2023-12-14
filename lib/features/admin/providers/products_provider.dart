@@ -23,7 +23,6 @@ class ProductsProvider extends ChangeNotifier {
   ];
   String defaultCategory = 'Mobiles';
 
-
   onCategoryChanged(String? newValue) {
     defaultCategory = newValue!;
     notifyListeners();
@@ -42,8 +41,8 @@ class ProductsProvider extends ChangeNotifier {
         name: productNameController.text,
         description: productNameController.text,
         category: defaultCategory,
-        quantity: productPriceController.text,
-        price: productQuantityController.text,
+        quantity: int.parse(productPriceController.text),
+        price: int.parse(productQuantityController.text),
         images: images,
       );
     }

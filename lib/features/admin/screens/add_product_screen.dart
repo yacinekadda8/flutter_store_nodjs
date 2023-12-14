@@ -7,7 +7,6 @@ import 'package:flutter_store_nodjs/components/constans.dart';
 import 'package:flutter_store_nodjs/features/admin/providers/products_provider.dart';
 import 'package:provider/provider.dart';
 
-
 class AddProductScreen extends StatefulWidget {
   static const String routeName = '/add-product-screen';
   const AddProductScreen({super.key});
@@ -101,6 +100,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   child: CustomTextField(
                     controller: productProvider.productPriceController,
                     hintText: 'Product price',
+                    textInputType: TextInputType.number,
                   ),
                 ),
                 Padding(
@@ -108,6 +108,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   child: CustomTextField(
                     controller: productProvider.productQuantityController,
                     hintText: 'Product quantity',
+                    textInputType: TextInputType.number,
                   ),
                 ),
                 const Text(

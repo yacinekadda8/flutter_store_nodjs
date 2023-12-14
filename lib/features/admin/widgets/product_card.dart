@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ProductCard extends StatelessWidget {
   final String productName;
   final String productDescription;
-  final double productPrice;
+  final int productPrice;
   final String imageUrl;
 
   const ProductCard({super.key, 

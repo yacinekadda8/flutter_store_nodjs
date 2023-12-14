@@ -3,6 +3,7 @@ import 'package:flutter_store_nodjs/features/admin/screens/add_product_screen.da
 
 import '../../../common/widgets/loading.dart';
 import '../../../models/product.dart';
+import '../../../models/product_model.dart';
 import '../services/admin_services.dart';
 import '../widgets/product_card.dart';
 
@@ -14,7 +15,7 @@ class PostsScreen extends StatefulWidget {
 }
 
 class _PostsScreenState extends State<PostsScreen> {
-  List<Product>? products;
+  List<ProductModel>? products;
   AdminServices adminServices = AdminServices();
 
   @override
@@ -25,7 +26,8 @@ class _PostsScreenState extends State<PostsScreen> {
   }
 
   getProductsInvok() async {
-    List<Product>? fetchedProducts = await adminServices.getAllProduct(context);
+    List<ProductModel>? fetchedProducts =
+        await adminServices.getAllProduct(context);
     products = fetchedProducts;
     setState(() {});
   }
@@ -46,10 +48,10 @@ class _PostsScreenState extends State<PostsScreen> {
                     itemBuilder: (context, index) {
                       final product = products![index];
                       return ProductCard(
-                          productName: product.name,
-                          productDescription: product.description,
-                          productPrice: product.price,
-                          imageUrl: product.images[0]);
+                          productName: product.name ?? 'unkown',
+                          productDescription: product.description ?? "dskfjs",
+                          productPrice: product.price ?? 33,
+                          imageUrl: product.images![0]);
                     },
                   ),
                 ),
