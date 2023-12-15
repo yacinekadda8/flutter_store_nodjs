@@ -18,7 +18,7 @@ class ProductsProvider extends ChangeNotifier {
     'Mobiles',
     'Computers',
     'Laptop',
-    'Pc and Laptop accessories',
+    'Accessories',
     'Tablets',
     'Watches'
   ];
@@ -35,21 +35,47 @@ class ProductsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addProduct({required context}) {
+  void addProduct(
+      {required BuildContext context, required VoidCallback onSuccess}) {
     if (addProductGlobalkey.currentState!.validate() || images.isNotEmpty) {
       adminServices.addProduct(
-        context: context,
-        name: productNameController.text,
-        description: productNameController.text,
-        category: defaultCategory,
-        quantity: int.parse(productPriceController.text),
-        price: int.parse(productQuantityController.text),
-        images: images,
-      );
+          context: context,
+          name: productNameController.text,
+          description: productDescriptionController.text,
+          category: defaultCategory,
+          quantity: int.parse(productPriceController.text),
+          price: int.parse(productQuantityController.text),
+          images: images,
+          onSuccess: onSuccess
+          );
     }
   }
+  // void addProduct(
+  //     {required BuildContext context, required VoidCallback onSuccess}) {
+  //   if (addProductGlobalkey.currentState!.validate() || images.isNotEmpty) {
+  //     adminServices.addProduct(
+  //         context: context,
+  //         name: productNameController.text,
+  //         description: productDescriptionController.text,
+  //         category: defaultCategory,
+  //         quantity: int.parse(productPriceController.text),
+  //         price: int.parse(productQuantityController.text),
+  //         images: images,
+  //         onSuccess: () {
+  //           showSnackBar(context, 'Product Added successfuly!');
+  //           productNameController.clear();
+  //           productDescriptionController.clear();
+  //           productPriceController.clear();
+  //           productQuantityController.clear();
+  //           images.clear();
+  //           notifyListeners();
+  //           Navigator.pop(context);
+  //         });
+  //   }
+  // }
 
-  void deleteProduct(ProductModel product, int index,BuildContext context,VoidCallback onSuccess) {
+  void deleteProduct(ProductModel product, int index, BuildContext context,
+      VoidCallback onSuccess) {
     adminServices.deleteProduct(
       context: context,
       product: product,

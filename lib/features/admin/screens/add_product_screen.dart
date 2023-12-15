@@ -4,8 +4,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_store_nodjs/common/widgets/custom_textfield.dart';
 import 'package:flutter_store_nodjs/components/constans.dart';
+import 'package:flutter_store_nodjs/components/utils.dart';
 import 'package:flutter_store_nodjs/features/admin/providers/products_provider.dart';
 import 'package:provider/provider.dart';
+
+import '../services/admin_services.dart';
 
 class AddProductScreen extends StatefulWidget {
   static const String routeName = '/add-product-screen';
@@ -19,6 +22,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   @override
   Widget build(BuildContext context) {
     final productProvider = Provider.of<ProductsProvider>(context);
+    AdminServices adminServices = AdminServices();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -137,7 +141,25 @@ class _AddProductScreenState extends State<AddProductScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          productProvider.addProduct(context: context);
+          productProvider.addProduct(
+              context: context,
+              onSuccess: () {
+                //adminServices.getAllProduct(context);
+                productProvider.addProduct(
+                    context: context,
+                    onSuccess: () {
+                      
+                      productProvider.productNameController.clear();
+                      productProvider.productDescriptionController.clear();
+                      productProvider.productPriceController.clear();
+                      productProvider.productQuantityController.clear();
+                      productProvider.images.clear();
+                      adminServices.getAllProduct(context);
+                      setState(() {});
+                      showSnackBar(context, 'Product Added successfuly!');
+                      Navigator.pop(context);
+                    });
+              });
         },
         tooltip: 'Add a new product',
         child: const Icon(Icons.save_outlined),

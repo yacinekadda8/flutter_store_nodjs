@@ -18,80 +18,100 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context).user;
 
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          const MyHomeAppBar(),
-          const AddressBox(),
-          const CarouselImages(),
-          // Image.network(
-          //   "https://images.unsplash.com/photo-1701932521067-ab10be5e9e2a?q=80&w=1335&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-          //   width: MediaQuery.of(context).size.width,
-          //   height: 200,
-          //   fit: BoxFit.cover,
-          // ),
-          const HomeCategories(),
-          //Text(user.toJson()),
-          const Text(
-            'Todays daily deals',
-            style: TextStyle(
-              fontSize: 28,
-              fontWeight: FontWeight.bold,
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const MyHomeAppBar(),
+            const AddressBox(),
+            const CarouselImages(),
+            // Image.network(
+            //   "https://images.unsplash.com/photo-1701932521067-ab10be5e9e2a?q=80&w=1335&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            //   width: MediaQuery.of(context).size.width,
+            //   height: 200,
+            //   fit: BoxFit.cover,
+            // ),
+            const HomeCategories(),
+            //Text(user.toJson()),
+            const Text(
+              'Todays daily deals',
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 10),
-            color: MyConstans.surface,
-            height: 200,
-            child: Row(
-              children: [
-                Container(
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(5)),
-                  child: Image.network(
-                    'https://m.media-amazon.com/images/W/MEDIAX_792452-T1/images/I/81Svdy-MGbL._AC_SX425_.jpg',
-                    width: 200,
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              height: 200,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: MyConstans.surface,
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width / 2,
                     height: 200,
-                    fit: BoxFit.cover,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: const DecorationImage(
+                          image: NetworkImage(
+                            'https://m.media-amazon.com/images/W/MEDIAX_792452-T1/images/I/81Svdy-MGbL._AC_SX425_.jpg',
+                          ),
+                          fit: BoxFit.cover,
+                        )),
+                    // child: Image.network(
+                    //   'https://m.media-amazon.com/images/W/MEDIAX_792452-T1/images/I/81Svdy-MGbL._AC_SX425_.jpg',
+                    //   width: MediaQuery.of(context).size.width / 2,
+                    //   height: 200,
+                    //   fit: BoxFit.cover,
+                    // ),
                   ),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 2.5,
-                      child: const Text(
-                        'Acer Swift Go Intel Evo Thin & Light Premium',
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    const Text(
-                      'PRICE: 999\$',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const Text(
-                      'OLd PRICE: 1799\$',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        decoration: TextDecoration.lineThrough,
-                      ),
-                    ),
-                    Row(
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    width: MediaQuery.of(context).size.width / 2.5,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width / 2.5,
+                          child: const Text(
+                            'Acer Swift Go Intel Evo Thin & Light Premium',
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        const Text(
+                          'PRICE: 999\$',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const Text(
+                          'OLd PRICE: 1799\$',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.lineThrough,
+                          ),
+                        ),
                         Container(
                           color: MyConstans.redColorMain,
+                          width: 80,
                           child: const Text(
                             'Deal -28%',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -110,13 +130,13 @@ class HomeScreen extends StatelessWidget {
                           ],
                         )
                       ],
-                    )
-                  ],
-                ),
-              ],
-            ),
-          )
-        ],
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

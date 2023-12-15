@@ -80,6 +80,7 @@ class AdminServices {
     required int quantity,
     required int price,
     required List<File> images,
+    required void Function() onSuccess
   }) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false).user;
     try {
@@ -113,10 +114,7 @@ class AdminServices {
         httpErrorHandle(
           response: res,
           context: context,
-          onSuccess: () {
-            showSnackBar(context, 'Product Added successfuly!');
-            Navigator.pop(context);
-          },
+          onSuccess: onSuccess
         );
       }
     } catch (e) {
@@ -147,7 +145,7 @@ class AdminServices {
           context: context,
           onSuccess: () {
             onSuccess();
-            
+
           },
         );
       }

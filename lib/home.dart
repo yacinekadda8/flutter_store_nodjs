@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_store_nodjs/components/constans.dart';
-import '../../features/account/screens/account.dart';
-import '../../features/home/screens/home_screen.dart';
+import 'features/account/screens/account.dart';
+import 'features/home/screens/home_screen.dart';
 
 // Define the BottomBar widget as a StatefulWidget
-class BottomBar extends StatefulWidget {
+class Home extends StatefulWidget {
   // Define a route name for the widget
   static const String routeName = "/actual-home";
 
   // Constructor for the BottomBar widget
-  const BottomBar({super.key});
+  const Home({super.key});
 
   // Override the createState method to return the associated state class
   @override
-  State<BottomBar> createState() => _BottomBarState();
+  State<Home> createState() => _HomeState();
 }
 
 // Define the associated state class for BottomBar
-class _BottomBarState extends State<BottomBar> {
+class _HomeState extends State<Home> {
   // State variables
   int _page = 0; // Represents the currently selected page index
   double btmBarItemWidth = 40.0; // Width of bottom bar items
@@ -48,7 +48,7 @@ class _BottomBarState extends State<BottomBar> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _page, // Currently selected page index
         selectedItemColor: MyConstans.lightBlueSecondary, // Selected item color
-        unselectedItemColor: MyConstans.yellowPrimary, // Unselected item color
+        unselectedItemColor: MyConstans.redColorMain, // Unselected item color
         backgroundColor: MyConstans.background, // Background color
         iconSize: 28, // Size of icons in the bottom bar
         onTap: updatePage, // Callback function for item tap

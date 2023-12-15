@@ -21,7 +21,7 @@ class MyConstans {
   static const Color redColorMain = Color(0xFFe1233c); //
   static const Color yellowPrimary = Color(0xFFf9bc01); // unselected
   static const Color lightBlueSecondary = Color(0xFF5a80ee); // selected
-  //static const Color darkBlueSecondary = Color(0xFF213ea9); //  
+  //static const Color darkBlueSecondary = Color(0xFF213ea9); //
 
   static const Color background = Color(0xFFFFFFFF); //
   static const Color surface = Color(0xFFF2F2F2); //
@@ -56,8 +56,8 @@ class MyConstans {
       'image': 'assets/images/categories/laptop.png',
     },
     {
-      'title': 'Pc and Laptop accessories',
-      'image': 'assets/images/categories/pc-and-laptop-accessories.jpg',
+      'title': 'Accessories',
+      'image': 'assets/images/categories/pc-and-laptop-accessories.png',
     },
     {
       'title': 'Tablets',
