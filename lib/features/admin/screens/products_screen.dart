@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_store_nodjs/features/admin/screens/add_product_screen.dart';
+import 'package:flutter_store_nodjs/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../../common/widgets/loading.dart';
+import '../../../components/utils.dart';
 import '../../../models/product.dart';
 import '../../../models/product_model.dart';
+import '../providers/products_provider.dart';
 import '../services/admin_services.dart';
 import '../widgets/product_card.dart';
 
@@ -32,9 +36,21 @@ class _PostsScreenState extends State<PostsScreen> {
     setState(() {});
   }
 
+  // void deleteProduct(ProductModel product, int index) {
+  //   adminServices.deleteProduct(
+  //     context: context,
+  //     product: product,
+  //     onSuccess: () {
+  //       products!.removeAt(index);
+  //       setState(() {});
+  //     },
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
-    // final productProvider = Provider.of<ProductsProvider>(context);
+    final productProvider = Provider.of<ProductsProvider>(context);
+    final userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       body: products == null
           ? const Loading()
@@ -47,11 +63,25 @@ class _PostsScreenState extends State<PostsScreen> {
                     itemCount: products!.length,
                     itemBuilder: (context, index) {
                       final product = products![index];
-                      return ProductCard(
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                            left: 10.0, right: 10, top: 10),
+                        child: ProductCard(
                           productName: product.name ?? 'unkown',
                           productDescription: product.description ?? "dskfjs",
                           productPrice: product.price ?? 33,
-                          imageUrl: product.images![0]);
+                          imageUrl: product.images![0],
+                          onDeletePressed: () {
+                            productProvider
+                                .deleteProduct(product, index, context, () {
+                              products!.removeAt(index);
+                              setState(() {});
+                              showSnackBar(
+                                  context, 'Product Deleted successfuly!');
+                            });
+                          },
+                        ),
+                      );
                     },
                   ),
                 ),

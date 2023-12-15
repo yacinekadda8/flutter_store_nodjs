@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class ProductCard extends StatelessWidget {
   final String productName;
@@ -6,11 +7,15 @@ class ProductCard extends StatelessWidget {
   final int productPrice;
   final String imageUrl;
 
-  const ProductCard({super.key, 
+  final VoidCallback onDeletePressed;
+
+  const ProductCard({
+    super.key,
     required this.productName,
     required this.productDescription,
     required this.productPrice,
     required this.imageUrl,
+    required this.onDeletePressed,
   });
 
   @override
@@ -34,28 +39,53 @@ class ProductCard extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Row(
               children: [
-                Text(
-                  productName,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                SizedBox(
+                  width: MediaQuery.of(context).size.width / 1.5,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        productName,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        productDescription,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        '\$${productPrice.toString()}',
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  productDescription,
-                  style: const TextStyle(fontSize: 16),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  '\$${productPrice.toString()}',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green,
+                //Gap(200),
+                const Expanded(child: Gap(5)),
+                IconButton(
+                  onPressed: onDeletePressed
+                  //debugPrint("token: ${userProvider.user.token}");
+                  ,
+                  icon: const Icon(
+                    Icons.delete_forever,
+                    size: 50,
+                    color: Colors.red,
                   ),
                 ),
               ],

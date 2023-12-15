@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_store_nodjs/components/utils.dart';
 
+import '../../../models/product_model.dart';
 import '../services/admin_services.dart';
 
 class ProductsProvider extends ChangeNotifier {
@@ -46,6 +47,14 @@ class ProductsProvider extends ChangeNotifier {
         images: images,
       );
     }
+  }
+
+  void deleteProduct(ProductModel product, int index,BuildContext context,VoidCallback onSuccess) {
+    adminServices.deleteProduct(
+      context: context,
+      product: product,
+      onSuccess: onSuccess,
+    );
   }
 
   @override
