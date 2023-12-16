@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_store_nodjs/components/myconstans.dart';
 import 'package:flutter_store_nodjs/features/home/screens/home_category_screen.dart';
+import 'package:flutter_store_nodjs/features/search/screens/search_screen.dart';
 import 'package:flutter_store_nodjs/models/product_model.dart';
 import 'features/home/screens/product_details_screen.dart';
 import 'home.dart';
@@ -36,6 +37,12 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => ProductDetailsScreen(product: product),
+      );
+    case SearchScreen.routeName:
+      var searchQuery = routeSettings.arguments as String;
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => SearchScreen(searchQuery: searchQuery),
       );
 
     case HomeCategoryScreen.routeName:

@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_store_nodjs/features/home/services/home_services.dart';
 import 'package:flutter_store_nodjs/features/home/widgets/carousel_images.dart';
 import 'package:flutter_store_nodjs/features/home/widgets/address_box.dart';
+import 'package:flutter_store_nodjs/features/search/screens/search_screen.dart';
 import '../../../components/myconstans.dart';
 import '../../../models/product_model.dart';
 import '../widgets/all_products.dart';
 import '../widgets/home_categories.dart';
-import '../widgets/myhome_appbar.dart';
+import '../widgets/my_search_appbar.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home-screen';
@@ -41,26 +42,19 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const MyHomeAppBar(),
+            const MySearchAppBar(),
             const AddressBox(),
             const CarouselImages(),
-            // Image.network(
-            //   "https://images.unsplash.com/photo-1701932521067-ab10be5e9e2a?q=80&w=1335&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            //   width: MediaQuery.of(context).size.width,
-            //   height: 200,
-            //   fit: BoxFit.cover,
-            // ),
             const HomeCategories(),
-            //Text(user.toJson()),
             AllProducts(productsList: productsList),
             //DealOfTheDay(),
+            //Text(user.toJson()),
           ],
         ),
       ),
     );
   }
 }
-
 
 class DealOfTheDay extends StatelessWidget {
   const DealOfTheDay({

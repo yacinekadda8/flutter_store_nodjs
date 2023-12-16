@@ -36,16 +36,18 @@ class Orders extends StatelessWidget {
             )
           ],
         ),
+        accountProvider.orders == null || 
+        accountProvider.orders!.isEmpty  ?
         const Text(
           "Hmm, We couldn't find any orders",
           style: TextStyle(color: MyConstans.textLight, fontSize: 18.0),
-        ),
+        ):
         Container(
           height: 170,
           padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
           child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: accountProvider.orders.length,
+              itemCount: accountProvider.orders!.length,
               itemBuilder: ((context, index) {
                 return SingleProduct(
                     accountProvider: accountProvider, index: index);

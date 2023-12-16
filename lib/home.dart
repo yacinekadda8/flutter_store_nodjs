@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_store_nodjs/components/myconstans.dart';
-import 'features/account/screens/account.dart';
+import 'features/account/screens/account_screen.dart';
 import 'features/home/screens/home_screen.dart';
 
 // Define the BottomBar widget as a StatefulWidget
@@ -34,7 +34,7 @@ class _HomeState extends State<Home> {
   // List of home screens
   List<Widget> pages = [
     const HomeScreen(),
-    const Account(),
+    const AccountScreen(),
     const Center(child: Text("cart")),
   ];
 

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import '../screens/auth_screen.dart';
 import '../services/auth_service.dart';
-
 
 enum Auth { signin, signup }
 
-class AuthProvider extends ChangeNotifier{
-  
+class AuthProvider extends ChangeNotifier {
   Auth auth = Auth.signup;
   final signUpFormsKey = GlobalKey<FormState>();
   final signInFormsKey = GlobalKey<FormState>();
@@ -14,7 +13,7 @@ class AuthProvider extends ChangeNotifier{
   final TextEditingController passwordController = TextEditingController();
   final AuthService authService = AuthService();
 
-    void signUpUser(context) {
+  void signUpUser(context) {
     authService.signUpUser(
       name: nameController.text,
       email: emailController.text,
@@ -22,14 +21,22 @@ class AuthProvider extends ChangeNotifier{
       context: context,
     );
   }
-    void signinUser(context) {
+
+  void signinUser(context) {
     authService.signInUser(
       email: emailController.text,
       password: passwordController.text,
       context: context,
     );
   }
-      @override
+
+  void signOut(BuildContext context) {
+    authService.clearAuthToken();
+    Navigator.pushNamedAndRemoveUntil(
+        context, AuthScreen.routeName, (route) => false);
+  }
+
+  @override
   void dispose() {
     super.dispose();
     nameController.dispose();

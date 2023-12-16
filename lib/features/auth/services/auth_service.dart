@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_store_nodjs/components/utils.dart';
+import 'package:flutter_store_nodjs/features/auth/screens/auth_screen.dart';
 import 'package:flutter_store_nodjs/features/home/screens/home_screen.dart';
 
 import '../../../components/myconstans.dart';
@@ -13,6 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class AuthService {
+  final String authTokenKey = 'app-auth-token';
   // sign up user
   void signUpUser({
     required BuildContext context,
@@ -83,7 +85,7 @@ class AuthService {
                   .setUser(res.body);
             }
             await sharedPreferences.setString(
-                "app-auth-token", jsonDecode(res.body)['token']);
+                authTokenKey, jsonDecode(res.body)['token']);
 
             if (context.mounted) {
               Navigator.pushNamedAndRemoveUntil(
@@ -103,16 +105,16 @@ class AuthService {
   void getUserData(BuildContext context) async {
     try {
       SharedPreferences sp = await SharedPreferences.getInstance();
-      String? token = sp.getString('app-auth-token');
+      String? token = sp.getString(authTokenKey);
 
       if (token == null) {
-        sp.setString('app-auth-token', '');
+        sp.setString(authTokenKey, '');
       }
 
       var resToken = await http.post(Uri.parse('$uri/isValidToken'),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=utf-8',
-            'app-auth-token': token!
+            authTokenKey: token!
           });
 
       var response = jsonDecode(resToken.body);
@@ -121,7 +123,7 @@ class AuthService {
         http.Response userRes = await http.get(Uri.parse('$uri/'),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=utf-8',
-              'app-auth-token': token
+              authTokenKey: token
             });
         if (context.mounted) {
           var userProvider = Provider.of<UserProvider>(context, listen: false);
@@ -131,5 +133,11 @@ class AuthService {
     } catch (err) {
       if (context.mounted) showSnackBar(context, err.toString());
     }
+  }
+
+  Future<void> clearAuthToken() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove(
+        authTokenKey); // This will remove the authTokenKey key from shared preferences
   }
 }

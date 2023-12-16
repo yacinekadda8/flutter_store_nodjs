@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
 
 import '../../../components/myconstans.dart';
+import '../../search/screens/search_screen.dart';
 
-class MyHomeAppBar extends StatelessWidget {
-  const MyHomeAppBar({
+class MySearchAppBar extends StatefulWidget {
+  const MySearchAppBar({
     super.key,
   });
+
+  @override
+  State<MySearchAppBar> createState() => _MySearchAppBarState();
+}
+
+class _MySearchAppBarState extends State<MySearchAppBar> {
+  TextEditingController searchQueryController = TextEditingController();
+  void goToSearchScreen(String searchQuery) {
+    Navigator.pushNamed(
+      context,
+      SearchScreen.routeName,
+      arguments: searchQuery,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +38,8 @@ class MyHomeAppBar extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(left: 8.0, right: 8.0),
           child: TextFormField(
+            controller: searchQueryController,
+            onFieldSubmitted: goToSearchScreen,
             decoration: const InputDecoration(
               prefixIcon: Icon(Icons.search_outlined, size: 30),
               hintText: 'Search Amazon',
