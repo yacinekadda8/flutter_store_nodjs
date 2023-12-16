@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const String uri = "http://192.168.1.2:3000";
+const String uri = "http://192.168.1.11:3000";
 //const String uri = "http://10.0.2.2:3000";
 
 class MyConstans {
@@ -8,9 +8,11 @@ class MyConstans {
   static const String avatar = 'assets/images/unknown-user-avatar.png';
   static const appBarGradient = LinearGradient(
     colors: [
-      Color(0xFFF12C57),
-      Color(0xFFEB345C),
+      redColorMain,
+      Color.fromARGB(255, 236, 58, 132),
     ],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
     stops: [0.5, 1.0],
   );
 
@@ -52,7 +54,7 @@ class MyConstans {
       'image': 'assets/images/categories/computer.png',
     },
     {
-      'title': 'Laptop',
+      'title': 'Laptops',
       'image': 'assets/images/categories/laptop.png',
     },
     {

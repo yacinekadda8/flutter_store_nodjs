@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_store_nodjs/components/myconstans.dart';
+import 'package:flutter_store_nodjs/features/home/screens/home_category_screen.dart';
+import 'package:flutter_store_nodjs/models/product_model.dart';
+import 'features/home/screens/product_details_screen.dart';
 import 'home.dart';
 import 'features/admin/screens/add_product_screen.dart';
 import 'features/auth/screens/auth_screen.dart';
@@ -26,6 +30,23 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const AddProductScreen(),
+      );
+    case ProductDetailsScreen.routeName:
+      var product = routeSettings.arguments as ProductModel;
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => ProductDetailsScreen(product: product),
+      );
+
+    case HomeCategoryScreen.routeName:
+      // get you value from the arguments
+      var categotie = routeSettings.arguments as String;
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => HomeCategoryScreen(
+          // get you value from the variable
+          category: categotie,
+        ),
       );
 
     // case CategoryDealsScreen.routeName:

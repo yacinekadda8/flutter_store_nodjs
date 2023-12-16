@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_store_nodjs/common/widgets/custom_textfield.dart';
-import 'package:flutter_store_nodjs/components/constans.dart';
+import 'package:flutter_store_nodjs/components/myconstans.dart';
 import 'package:flutter_store_nodjs/components/utils.dart';
 import 'package:flutter_store_nodjs/features/admin/providers/products_provider.dart';
 import 'package:provider/provider.dart';
@@ -148,16 +148,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 productProvider.addProduct(
                     context: context,
                     onSuccess: () {
-                      
-                      productProvider.productNameController.clear();
-                      productProvider.productDescriptionController.clear();
-                      productProvider.productPriceController.clear();
-                      productProvider.productQuantityController.clear();
-                      productProvider.images.clear();
-                      adminServices.getAllProduct(context);
                       setState(() {});
-                      showSnackBar(context, 'Product Added successfuly!');
-                      Navigator.pop(context);
                     });
               });
         },

@@ -17,7 +17,7 @@ class ProductsProvider extends ChangeNotifier {
   List<String> categoriesNames = [
     'Mobiles',
     'Computers',
-    'Laptop',
+    'Laptops',
     'Accessories',
     'Tablets',
     'Watches'
@@ -43,36 +43,21 @@ class ProductsProvider extends ChangeNotifier {
           name: productNameController.text,
           description: productDescriptionController.text,
           category: defaultCategory,
-          quantity: int.parse(productPriceController.text),
-          price: int.parse(productQuantityController.text),
+          quantity: int.parse(productQuantityController.text),
+          price: int.parse(productPriceController.text),
           images: images,
-          onSuccess: onSuccess
-          );
+          onSuccess: () {
+            showSnackBar(context, 'Product Added successfuly!');
+            productNameController.clear();
+            productDescriptionController.clear();
+            productPriceController.clear();
+            productQuantityController.clear();
+            images.clear();
+            notifyListeners();
+            Navigator.pop(context);
+          });
     }
   }
-  // void addProduct(
-  //     {required BuildContext context, required VoidCallback onSuccess}) {
-  //   if (addProductGlobalkey.currentState!.validate() || images.isNotEmpty) {
-  //     adminServices.addProduct(
-  //         context: context,
-  //         name: productNameController.text,
-  //         description: productDescriptionController.text,
-  //         category: defaultCategory,
-  //         quantity: int.parse(productPriceController.text),
-  //         price: int.parse(productQuantityController.text),
-  //         images: images,
-  //         onSuccess: () {
-  //           showSnackBar(context, 'Product Added successfuly!');
-  //           productNameController.clear();
-  //           productDescriptionController.clear();
-  //           productPriceController.clear();
-  //           productQuantityController.clear();
-  //           images.clear();
-  //           notifyListeners();
-  //           Navigator.pop(context);
-  //         });
-  //   }
-  // }
 
   void deleteProduct(ProductModel product, int index, BuildContext context,
       VoidCallback onSuccess) {

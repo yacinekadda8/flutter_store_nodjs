@@ -7,7 +7,7 @@ import 'package:flutter_store_nodjs/features/auth/providers/auth_provider.dart';
 import 'package:flutter_store_nodjs/providers/user_provider.dart';
 import 'package:flutter_store_nodjs/features/auth/services/auth_service.dart';
 import 'package:provider/provider.dart';
-import 'components/constans.dart';
+import 'components/myconstans.dart';
 import 'router.dart';
 import 'features/auth/screens/auth_screen.dart';
 

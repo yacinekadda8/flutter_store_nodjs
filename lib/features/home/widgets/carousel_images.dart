@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_store_nodjs/components/constans.dart';
+import 'package:flutter_store_nodjs/components/myconstans.dart';
 
 class CarouselImages extends StatelessWidget {
   const CarouselImages({super.key});

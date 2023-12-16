@@ -3,8 +3,7 @@ import 'dart:io';
 
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_store_nodjs/components/constans.dart';
-import 'package:flutter_store_nodjs/models/product.dart';
+import 'package:flutter_store_nodjs/components/myconstans.dart';
 import 'package:flutter_store_nodjs/providers/user_provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -37,7 +36,7 @@ class AdminServices {
 //   }
 // }
 
-  Future<List<ProductModel>> getAllProduct(
+  Future<List<ProductModel>> getAllProducts(
     BuildContext context,
   ) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
@@ -72,16 +71,15 @@ class AdminServices {
     return products;
   }
 
-  void addProduct({
-    required BuildContext context,
-    required String name,
-    required String description,
-    required String category,
-    required int quantity,
-    required int price,
-    required List<File> images,
-    required void Function() onSuccess
-  }) async {
+  void addProduct(
+      {required BuildContext context,
+      required String name,
+      required String description,
+      required String category,
+      required int quantity,
+      required int price,
+      required List<File> images,
+      required void Function() onSuccess}) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false).user;
     try {
       final cloudinary = CloudinaryPublic('ylzcloud', 'sorwhhco');
@@ -111,11 +109,7 @@ class AdminServices {
         },
       );
       if (context.mounted) {
-        httpErrorHandle(
-          response: res,
-          context: context,
-          onSuccess: onSuccess
-        );
+        httpErrorHandle(response: res, context: context, onSuccess: onSuccess);
       }
     } catch (e) {
       //debugPrint(e.toString());
@@ -145,7 +139,6 @@ class AdminServices {
           context: context,
           onSuccess: () {
             onSuccess();
-
           },
         );
       }

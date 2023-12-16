@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../components/constans.dart';
+import '../../../components/myconstans.dart';
 import '../providers/account_provider.dart';
 
 class SingleProduct extends StatelessWidget {

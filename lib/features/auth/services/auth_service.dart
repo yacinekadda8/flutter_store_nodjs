@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_store_nodjs/components/utils.dart';
 import 'package:flutter_store_nodjs/features/home/screens/home_screen.dart';
 
-import '../../../components/constans.dart';
+import '../../../components/myconstans.dart';
 import '../../../components/error_handling.dart';
 import '../../../providers/user_provider.dart';
 import '../../../models/user.dart';

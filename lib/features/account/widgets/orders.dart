@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_store_nodjs/components/constans.dart';
+import 'package:flutter_store_nodjs/components/myconstans.dart';
 import 'package:flutter_store_nodjs/features/account/providers/account_provider.dart';
 import 'package:provider/provider.dart';
 

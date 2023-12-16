@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_store_nodjs/features/admin/screens/add_product_screen.dart';
-import 'package:flutter_store_nodjs/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../common/widgets/loading.dart';
 import '../../../components/utils.dart';
-import '../../../models/product.dart';
 import '../../../models/product_model.dart';
 import '../providers/products_provider.dart';
 import '../services/admin_services.dart';
@@ -31,7 +29,7 @@ class _PostsScreenState extends State<PostsScreen> {
 
   getProductsInvok() async {
     List<ProductModel>? fetchedProducts =
-        await adminServices.getAllProduct(context);
+        await adminServices.getAllProducts(context);
     products = fetchedProducts;
     setState(() {});
   }
@@ -50,7 +48,7 @@ class _PostsScreenState extends State<PostsScreen> {
   @override
   Widget build(BuildContext context) {
     final productProvider = Provider.of<ProductsProvider>(context);
-    final userProvider = Provider.of<UserProvider>(context);
+    //final userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       body: products == null
           ? const Loading()
@@ -58,7 +56,7 @@ class _PostsScreenState extends State<PostsScreen> {
               ? const Center(
                   child: Text('No products available.'),
                 )
-              : Container(
+              : SizedBox(
                   child: ListView.builder(
                     itemCount: products!.length,
                     itemBuilder: (context, index) {

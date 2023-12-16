@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
-import '../../../components/constans.dart';
+import '../../../components/myconstans.dart';
 
 class AddressBox extends StatelessWidget {
   const AddressBox({
@@ -16,12 +16,23 @@ class AddressBox extends StatelessWidget {
       decoration: const BoxDecoration(gradient: MyConstans.appBarGradient),
       child: const Row(
         children: [
-          Icon(Icons.location_on_outlined),
+          Icon(
+            Icons.location_on_outlined,
+            color: MyConstans.yellowPrimary,
+          ),
+          Gap(10),
           Expanded(
               child: Text('Deliver to Algeria',
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontSize: 15))),
-          Icon(Icons.keyboard_arrow_down_outlined),
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: MyConstans.text,
+                    fontWeight: FontWeight.w900,
+                  ))),
+          const Icon(
+            Icons.keyboard_arrow_down_outlined,
+            color: MyConstans.yellowPrimary,
+          ),
         ],
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_store_nodjs/features/admin/widgets/myadmin_appbar.dart';
 
-import '../../../components/constans.dart';
+import '../../../components/myconstans.dart';
 import 'products_screen.dart';
 
 class AdminScreen extends StatefulWidget {

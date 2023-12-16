@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_store_nodjs/models/user.dart';
 
-import '../../../components/constans.dart';
+import '../../../components/myconstans.dart';
 
 class UserInfo extends StatelessWidget {
   const UserInfo({

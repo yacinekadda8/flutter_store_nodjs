@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../../common/widgets/custom_button.dart';
 import '../../../common/widgets/custom_textfield.dart';
-import '../../../components/constans.dart';
+import '../../../components/myconstans.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
