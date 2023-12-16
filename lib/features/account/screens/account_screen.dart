@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_store_nodjs/common/widgets/custom_button.dart';
 import 'package:flutter_store_nodjs/features/auth/providers/auth_provider.dart';
-import 'package:flutter_store_nodjs/features/auth/services/auth_service.dart';
 import 'package:flutter_store_nodjs/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 import '../widgets/account_appbar.dart';

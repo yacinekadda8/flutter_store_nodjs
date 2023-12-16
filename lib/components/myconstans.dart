@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-
 const String uri = "http://192.168.1.11:3000";
 //const String uri = "http://10.0.2.2:3000";
 
 class MyConstans {
+  
   static const String logo = 'assets/images/amazon-logo.png';
   static const String avatar = 'assets/images/unknown-user-avatar.png';
   static const appBarGradient = LinearGradient(

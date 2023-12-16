@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_store_nodjs/components/utils.dart';
-import 'package:flutter_store_nodjs/features/auth/screens/auth_screen.dart';
 import 'package:flutter_store_nodjs/features/home/screens/home_screen.dart';
 
 import '../../../components/myconstans.dart';

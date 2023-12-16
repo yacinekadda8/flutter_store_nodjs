@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_store_nodjs/features/home/services/home_services.dart';
 import 'package:flutter_store_nodjs/features/home/widgets/carousel_images.dart';
 import 'package:flutter_store_nodjs/features/home/widgets/address_box.dart';
-import 'package:flutter_store_nodjs/features/search/screens/search_screen.dart';
 import '../../../components/myconstans.dart';
 import '../../../models/product_model.dart';
 import '../widgets/all_products.dart';
@@ -20,11 +19,15 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   HomeServices homeServices = HomeServices();
+  ProductModel productModel = ProductModel();
   List<ProductModel>? productsList;
+  List<ProductModel>? productsSimilarList;
+
   getProductsInvok() async {
     List<ProductModel>? fetchedProducts =
         await homeServices.getAllProducts(context);
     productsList = fetchedProducts;
+
     setState(() {});
   }
 
@@ -44,9 +47,12 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             const MySearchAppBar(),
             const AddressBox(),
-            const CarouselImages(),
+            const CarouselImages(
+              carouselImages: MyConstans.carouselImages,
+              height: 200,
+            ),
             const HomeCategories(),
-            AllProducts(productsList: productsList),
+            AllProducts(productsList: productsList, text: 'All Products'),
             //DealOfTheDay(),
             //Text(user.toJson()),
           ],

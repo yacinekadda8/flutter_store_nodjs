@@ -1,20 +1,47 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_store_nodjs/common/widgets/loading.dart';
+import 'package:flutter_store_nodjs/common/widgets/stars.dart';
 import 'package:flutter_store_nodjs/components/myconstans.dart';
-import 'package:flutter_store_nodjs/features/home/widgets/carousel_images.dart';
 import 'package:gap/gap.dart';
 import '../../../models/product_model.dart';
-import 'package:flutter/material.dart';
+import '../services/home_services.dart';
+import '../widgets/all_products.dart';
+import '../widgets/carousel_images.dart';
+import '../widgets/product_card.dart';
 
-class ProductDetailsScreen extends StatelessWidget {
+class ProductDetailsScreen extends StatefulWidget {
   final ProductModel product;
   static const String routeName = "/product-details-screen";
 
   const ProductDetailsScreen({super.key, required this.product});
 
   @override
+  State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
+}
+
+class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+  final HomeServices homeServices = HomeServices();
+  List<ProductModel>? productsSimilarList;
+  void getProductsInvok() async {
+    List<ProductModel>? fetchedSimilarProducts;
+    fetchedSimilarProducts =
+        await homeServices.getSimilarProducts(context, widget.product.id!);
+    productsSimilarList = fetchedSimilarProducts;
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getProductsInvok();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    //final homeProvider = Provider.of<HomeProvider>(context);
     var width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Product Details'),
@@ -26,37 +53,16 @@ class ProductDetailsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Product Image
-              //            CarouselImages(product.images!),
-              CarouselSlider(
-                  items: product.images!.map((i) {
-                    return Builder(
-                        builder: (BuildContext context) => Image.network(
-                              i,
-                              width: MediaQuery.of(context).size.width,
-                              height: 200,
-                              fit: BoxFit.cover,
-                            ));
-                  }).toList(),
-                  options: CarouselOptions(viewportFraction: 1, height: 200)),
-
-              // Container(
-              //   height: 300,
-              //   width: double.infinity,
-              //   decoration: BoxDecoration(
-              //     image: DecorationImage(
-              //       image: NetworkImage(product.images?.first ?? ''),
-              //       fit: BoxFit.cover,
-              //     ),
-              //   ),
-              // ),
-
+              CarouselImages(
+                carouselImages: widget.product.images!,
+                height: 350,
+              ),
               // Product Name and Price
-
               Padding(
                 //width: width / 1.5,
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Text(
-                  product.name ?? 'No Name',
+                  widget.product.name ?? 'No Name',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
@@ -73,14 +79,14 @@ class ProductDetailsScreen extends StatelessWidget {
                     const Text(
                       'PRICE:',
                       style: TextStyle(
-                        fontSize: 30,
+                        fontSize: 26,
                         fontWeight: FontWeight.bold,
                         color: MyConstans.text,
                       ),
                     ),
                     const Gap(10),
                     Text(
-                      '\$${product.price ?? 0}',
+                      '\$${widget.product.price ?? 0}',
                       style: const TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
@@ -99,17 +105,51 @@ class ProductDetailsScreen extends StatelessWidget {
                   ],
                 ),
               ),
-
-              // Product Description
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Text(
-                  product.description ?? 'No Description',
-                  softWrap: true,
-                  textAlign: TextAlign.justify,
-                  style: const TextStyle(fontSize: 16),
+              const Padding(
+                //width: width / 1.5,
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
+                  children: [
+                    Text(
+                      '4.5',
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Gap(10),
+                    Stars(rating: 4.5, itemSize: 30),
+                    Gap(10),
+                    Text(
+                      '1350',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.normal,
+                        color: MyConstans.lightBlueSecondary,
+                      ),
+                    ),
+                  ],
                 ),
               ),
+              const Gap(10),
+              // Product Description
+              InkWell(
+                onTap: () {
+                  // open Full Description
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Text(
+                    widget.product.description ?? 'No Description',
+                    softWrap: true,
+                    maxLines: 10,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.justify,
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ),
+              ),
+              const Gap(20),
 
               // Buttons Section
               Container(
@@ -149,6 +189,81 @@ class ProductDetailsScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              const Gap(10),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Row(
+                  children: [
+                    const Text(
+                      'Rate the product: ',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: MyConstans.text,
+                      ),
+                    ),
+                    RatingBar.builder(
+                        maxRating: 1,
+                        allowHalfRating: true,
+                        itemSize: 30,
+                        itemCount: 5,
+                        initialRating: 1,
+                        itemBuilder: (context, _) =>
+                            Icon(Icons.star, color: Colors.amber[400]),
+                        onRatingUpdate: (rating) {}),
+                  ],
+                ),
+              ),
+              productsSimilarList == null
+                  ? const Loading()
+                  : Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          productsSimilarList!.isEmpty
+                              ? Text(
+                                  "No Similar Poducts",
+                                  style: TextStyle(
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.bold,
+                                    color: MyConstans.lightBlueSecondary,
+                                  ),
+                                )
+                              : Text(
+                                  "Similar Poducts",
+                                  style: TextStyle(
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.bold,
+                                    color: MyConstans.lightBlueSecondary,
+                                  ),
+                                ),
+                          SizedBox(
+                            height: 200,
+                            // Adjust the height as needed
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: productsSimilarList != null
+                                  ? productsSimilarList!.length
+                                  : 0,
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                ProductModel product =
+                                    productsSimilarList![index];
+                                return InkWell(
+                                    onTap: () {
+                                      Navigator.pushNamed(context,
+                                          ProductDetailsScreen.routeName,
+                                          arguments: product);
+                                    },
+                                    child: ProductCard(
+                                        product: productsSimilarList![index]));
+                              },
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
             ],
           ),
         ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_store_nodjs/components/myconstans.dart';
 import 'package:flutter_store_nodjs/features/home/screens/home_category_screen.dart';
 import 'package:flutter_store_nodjs/features/search/screens/search_screen.dart';
 import 'package:flutter_store_nodjs/models/product_model.dart';

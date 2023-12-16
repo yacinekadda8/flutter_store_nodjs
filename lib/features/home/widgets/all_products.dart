@@ -8,9 +8,11 @@ class AllProducts extends StatelessWidget {
   const AllProducts({
     super.key,
     required this.productsList,
+    required this.text,
   });
 
   final List<ProductModel>? productsList;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +21,9 @@ class AllProducts extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'All Products',
-            style: TextStyle(
+          Text(
+            text,
+            style: const TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.bold,
               color: MyConstans.lightBlueSecondary,
@@ -39,7 +41,8 @@ class AllProducts extends StatelessWidget {
                 return InkWell(
                     onTap: () {
                       Navigator.pushNamed(
-                          context, ProductDetailsScreen.routeName,arguments: product);
+                          context, ProductDetailsScreen.routeName,
+                          arguments: product);
                     },
                     child: ProductCard(product: productsList![index]));
               },

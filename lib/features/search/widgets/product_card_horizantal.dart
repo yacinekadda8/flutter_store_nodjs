@@ -1,17 +1,16 @@
-
 import 'package:flutter/material.dart';
-
+import 'package:flutter_store_nodjs/common/widgets/stars.dart';
 import '../../../models/product_model.dart';
 
 class ProductCardHorizontal extends StatelessWidget {
   final ProductModel product;
 
-  ProductCardHorizontal({required this.product});
+  const ProductCardHorizontal({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 150, // Adjust the height as needed
+    return SizedBox(
+      height: 180, // Adjust the height as needed
       child: Card(
         elevation: 3,
         shape: RoundedRectangleBorder(
@@ -47,16 +46,34 @@ class ProductCardHorizontal extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 4),
+                    const Stars(rating: 4, itemSize: 20),
                     Text(
                       'Price: \$${product.price ?? 0}',
-                      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(height: 4),
                     Text(
                       'Category: ${product.category ?? 'No Category'}',
-                      style: const TextStyle(fontSize: 12, color: Colors.grey),
+                      style: const TextStyle(fontSize: 14, color: Colors.grey),
                     ),
+                    product.quantity! > 0
+                        ? const Text(
+                            'In Stock',
+                            style: TextStyle(
+                                fontSize: 14, color: Colors.green),
+                          )
+                        : const Text(
+                            'Out of Stock',
+                            style: TextStyle(
+                                fontSize: 14, color: Colors.red),
+                          ),
+                    product.quantity! > 0
+                        ? const Text(
+                            'Free Shipping',
+                            style: TextStyle(
+                                fontSize: 14, color: Colors.grey),
+                          )
+                        : const SizedBox(),
                   ],
                 ),
               ),

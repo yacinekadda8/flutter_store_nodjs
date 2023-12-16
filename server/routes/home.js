@@ -22,6 +22,64 @@ homeRouter.get('/home/category-products',async(req,res)=>{
         res.status(500).json({error:e.message});
     }
 });
+// get all products that are similar to a given product
+// get more products that are similar to a given product
+homeRouter.get('/home/similar-products/:productId', async (req, res) => {
+  try {
+    const productId = req.params.productId;
+
+    // Find the product by ID
+    const product = await Product.findById(productId);
+
+    // If the product is not found, return an error
+    if (!product) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+
+    // Use a similar logic to find products with similar criteria
+    const similarProducts = await Product.find({
+      $or: [
+        { category: product.category }, // Same category
+        { name: { $regex: new RegExp(product.name, 'i') } }, // Similar name (case-insensitive)
+        // Add more criteria as needed
+      ],
+      _id: { $ne: productId }, // Exclude the current product from the results
+    });
+
+    res.status(200).json(similarProducts);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+
+
+// this work good
+// homeRouter.get('/home/similar-products/:productId', async (req, res) => {
+//   try {
+//     const productId = req.params.productId;
+
+//     // Find the product by ID
+//     const product = await Product.findById(productId);
+
+//     // If the product is not found, return an error
+//     if (!product) {
+//       return res.status(404).json({ error: 'Product not found' });
+//     }
+
+//     // Use a similar logic to find products with the same category or any other criteria
+//     const similarProducts = await Product.find({
+//       category: product.category,
+//       _id: { $ne: productId }, // Exclude the current product from the results
+//     });
+
+//     res.status(200).json(similarProducts);
+//   } catch (e) {
+//     res.status(500).json({ error: e.message });
+//   }
+// });
+
+
 // get all products that close to client query search 
 //regular expression with a case-insensitive match
 homeRouter.get('/home/search-products', async (req, res) => {
@@ -36,7 +94,7 @@ homeRouter.get('/home/search-products', async (req, res) => {
       
       const products = await Product.find({
         $or: [
-          { name: { $regex: regex } },
+          { name: { $regex: regex } }, 
           { description: { $regex: regex } }
         ]
       });
