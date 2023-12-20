@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
+
 const String uri = "http://192.168.1.11:3000";
 //const String uri = "http://10.0.2.2:3000";
 
 class MyConstans {
-  
   static const String logo = 'assets/images/amazon-logo.png';
   static const String avatar = 'assets/images/unknown-user-avatar.png';
-  static const appBarGradient = LinearGradient(
+  static var appBarGradient = LinearGradient(
     colors: [
+      Colors.red.withOpacity(0.3),
       redColorMain,
-      Color.fromARGB(255, 236, 58, 132),
     ],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    stops: const [0.5, 1.0],
+  );
+  static const addressBoxGradient = LinearGradient(
+    colors:  [
+      Colors.red,
+      redColorMain,
+    ],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
     stops: [0.5, 1.0],
   );
 

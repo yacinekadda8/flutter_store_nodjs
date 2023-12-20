@@ -11,6 +11,7 @@ class ProductsProvider extends ChangeNotifier {
   TextEditingController productDescriptionController = TextEditingController();
   TextEditingController productPriceController = TextEditingController();
   TextEditingController productQuantityController = TextEditingController();
+  TextEditingController productDiscountController = TextEditingController();
   List<File> images = [];
   final addProductGlobalkey = GlobalKey<FormState>();
   AdminServices adminServices = AdminServices();
@@ -37,13 +38,14 @@ class ProductsProvider extends ChangeNotifier {
 
   void addProduct(
       {required BuildContext context, required VoidCallback onSuccess}) {
-    if (addProductGlobalkey.currentState!.validate() || images.isNotEmpty) {
+    if (addProductGlobalkey.currentState!.validate() == true|| images.isNotEmpty) {
       adminServices.addProduct(
           context: context,
           name: productNameController.text,
           description: productDescriptionController.text,
           category: defaultCategory,
           quantity: int.parse(productQuantityController.text),
+          discount: int.parse(productDiscountController.text),
           price: int.parse(productPriceController.text),
           images: images,
           onSuccess: () {
@@ -52,6 +54,7 @@ class ProductsProvider extends ChangeNotifier {
             productDescriptionController.clear();
             productPriceController.clear();
             productQuantityController.clear();
+            productDiscountController.clear();
             images.clear();
             notifyListeners();
             Navigator.pop(context);
@@ -73,6 +76,7 @@ class ProductsProvider extends ChangeNotifier {
     productNameController.dispose();
     productDescriptionController.dispose();
     productPriceController.dispose();
+    productDiscountController.dispose();
     productQuantityController.dispose();
     super.dispose();
   }

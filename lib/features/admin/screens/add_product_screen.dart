@@ -7,7 +7,6 @@ import 'package:flutter_store_nodjs/components/myconstans.dart';
 import 'package:flutter_store_nodjs/features/admin/providers/products_provider.dart';
 import 'package:provider/provider.dart';
 
-
 class AddProductScreen extends StatefulWidget {
   static const String routeName = '/add-product-screen';
   const AddProductScreen({super.key});
@@ -113,6 +112,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     textInputType: TextInputType.number,
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: CustomTextField(
+                    controller: productProvider.productDiscountController,
+                    hintText: 'Product discount',
+                    textInputType: TextInputType.number,
+                  ),
+                ),
                 const Text(
                   'Product category:  ',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
@@ -139,16 +146,19 @@ class _AddProductScreenState extends State<AddProductScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          productProvider.addProduct(
-              context: context,
-              onSuccess: () {
-                //adminServices.getAllProduct(context);
-                productProvider.addProduct(
-                    context: context,
-                    onSuccess: () {
-                      setState(() {});
-                    });
-              });
+          if (productProvider.addProductGlobalkey.currentState!.validate() ==
+              true) {
+            productProvider.addProduct(
+                context: context,
+                onSuccess: () {
+                  //adminServices.getAllProduct(context);
+                  productProvider.addProduct(
+                      context: context,
+                      onSuccess: () {
+                        setState(() {});
+                      });
+                });
+          }
         },
         tooltip: 'Add a new product',
         child: const Icon(Icons.save_outlined),

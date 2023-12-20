@@ -7,8 +7,8 @@ const adminRouter = express.Router();
 // get add new product
 adminRouter.post('/admin/add-product',admin,async (req,res)=>{
     try {
-        const {name,description,images,price,quantity,category} = req.body;
-        let product = new Product({name,description,images,price,quantity,category});
+        const {name,description,images,price,quantity,discount,category} = req.body;
+        let product = new Product({name,description,images,price,quantity,discount,category});
         product = product.save();
         res.json(product);
     } catch (e) {

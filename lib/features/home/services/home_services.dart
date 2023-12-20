@@ -40,16 +40,17 @@ class HomeServices {
     }
     return products;
   }
-  Future<List<ProductModel>> getSimilarProducts(
-      BuildContext context, String productId) async {
-    // final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+  Future<List<ProductModel>> getAllProducts(
+    BuildContext context,
+  ) async {
+    //final userProvider = Provider.of<UserProvider>(context, listen: false);
     List<ProductModel> products = [];
     try {
       http.Response response = await http.get(
-        Uri.parse('$uri/home/similar-products/$productId'),
+        Uri.parse('$uri/home/get-products'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
-          //'app-auth-token': userProvider.user.token,
         },
       );
 
@@ -74,14 +75,12 @@ class HomeServices {
     return products;
   }
 
-  Future<List<ProductModel>> getAllProducts(
-    BuildContext context,
-  ) async {
+  Future<List<ProductModel>> getDescountsProducts(BuildContext context) async {
     //final userProvider = Provider.of<UserProvider>(context, listen: false);
     List<ProductModel> products = [];
     try {
       http.Response response = await http.get(
-        Uri.parse('$uri/home/get-products'),
+        Uri.parse('$uri/home/get-discounts-products'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -93,9 +92,7 @@ class HomeServices {
           context: context,
           onSuccess: () {
             for (int i = 0; i < jsonDecode(response.body).length; i++) {
-              products.add(ProductModel.fromJson(
-                jsonDecode(response.body)[i],
-              ));
+              products.add(ProductModel.fromJson(jsonDecode(response.body)[i]));
             }
           },
         );

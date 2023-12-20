@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_store_nodjs/common/widgets/loading.dart';
-import 'package:flutter_store_nodjs/features/home/screens/product_details_screen.dart';
+import 'package:flutter_store_nodjs/features/details/screens/product_details_screen.dart';
 import 'package:flutter_store_nodjs/features/home/services/home_services.dart';
 import 'package:flutter_store_nodjs/features/home/widgets/product_card.dart';
 import 'package:flutter_store_nodjs/models/product_model.dart';
@@ -46,8 +46,8 @@ class _HomeCategoryScreenState extends State<HomeCategoryScreen> {
                   scrollDirection: Axis.vertical,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2, // You can change the number of columns
-                    crossAxisSpacing: 8,
-                    mainAxisSpacing: 8,
+                    crossAxisSpacing: 4,
+                    mainAxisSpacing: 4,
                   ),
                   itemCount: productsList!
                       .length, // Replace with your actual list of products

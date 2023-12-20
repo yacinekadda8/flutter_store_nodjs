@@ -22,6 +22,13 @@ class CarouselImages extends StatelessWidget {
                     fit: BoxFit.cover,
                   ));
         }).toList(),
-        options: CarouselOptions(viewportFraction: 1, height: height));
+        options: CarouselOptions(
+          viewportFraction: 1,
+          height: height,
+          autoPlay: true,
+          autoPlayCurve: Curves.fastOutSlowIn,
+          autoPlayInterval:
+              const Duration(seconds: 15), // Change image every 5 seconds
+        ));
   }
 }

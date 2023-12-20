@@ -12,6 +12,21 @@ homeRouter.get('/home/get-products',async(req,res)=>{
         res.status(500).json({error:e.message});
     }
 });
+// get all products with discounts
+homeRouter.get('/home/get-discounts-products', async (req, res) => {
+  try {
+      // Get products with discounts
+      const productsWithDiscount = await Product.find({ discount: { $gt: 0 } });
+
+      // Sort products by discount in descending order
+      const sortedProducts = productsWithDiscount.sort((a, b) => b.discount - a.discount);
+
+      res.status(200).json(sortedProducts);
+  } catch (e) {
+      res.status(500).json({ error: e.message });
+  }
+});
+
 // get products of a specifec category
 homeRouter.get('/home/category-products',async(req,res)=>{
     try {

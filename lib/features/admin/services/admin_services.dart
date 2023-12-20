@@ -77,6 +77,7 @@ class AdminServices {
       required String description,
       required String category,
       required int quantity,
+      required int discount,
       required int price,
       required List<File> images,
       required void Function() onSuccess}) async {
@@ -98,6 +99,7 @@ class AdminServices {
           category: category,
           price: price,
           quantity: quantity,
+          discount: discount,
           images: imgsUrl);
 
       http.Response res = await http.post(
@@ -147,4 +149,5 @@ class AdminServices {
       if (context.mounted) showSnackBar(context, e.toString());
     }
   }
+  
 }

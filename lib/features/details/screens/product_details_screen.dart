@@ -4,11 +4,13 @@ import 'package:flutter_store_nodjs/common/widgets/loading.dart';
 import 'package:flutter_store_nodjs/common/widgets/stars.dart';
 import 'package:flutter_store_nodjs/components/myconstans.dart';
 import 'package:gap/gap.dart';
+import 'package:readmore/readmore.dart';
 import '../../../models/product_model.dart';
-import '../services/home_services.dart';
-import '../widgets/all_products.dart';
-import '../widgets/carousel_images.dart';
-import '../widgets/product_card.dart';
+import '../../home/widgets/products_listview_builder.dart';
+import '../details_services.dart';
+import '../widgets/payment_bottom_sheet.dart';
+import '../../home/widgets/carousel_images.dart';
+import '../../home/widgets/costum_btn.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   final ProductModel product;
@@ -21,12 +23,12 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-  final HomeServices homeServices = HomeServices();
+  final DetailsServices detailsServices = DetailsServices();
   List<ProductModel>? productsSimilarList;
   void getProductsInvok() async {
     List<ProductModel>? fetchedSimilarProducts;
     fetchedSimilarProducts =
-        await homeServices.getSimilarProducts(context, widget.product.id!);
+        await detailsServices.getSimilarProducts(context, widget.product.id!);
     productsSimilarList = fetchedSimilarProducts;
     setState(() {});
   }
@@ -94,14 +96,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       ),
                     ),
                     const Gap(10),
-                    const Text(
-                      '-15%',
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: MyConstans.redColorMain,
-                      ),
-                    ),
+                    widget.product.discount != null
+                        ? Text(
+                            '-${widget.product.discount ?? 0}%',
+                            style: const TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                              color: MyConstans.redColorMain,
+                            ),
+                          )
+                        : const SizedBox(),
                   ],
                 ),
               ),
@@ -139,14 +143,31 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Text(
-                    widget.product.description ?? 'No Description',
-                    softWrap: true,
-                    maxLines: 10,
-                    overflow: TextOverflow.ellipsis,
+                  child: ReadMoreText(
+                    "${widget.product.description} ",
+                    trimLines: 5,
+                    colorClickableText: MyConstans.lightBlueSecondary,
+                    trimMode: TrimMode.Line,
                     textAlign: TextAlign.justify,
-                    style: const TextStyle(fontSize: 16),
+                    trimCollapsedText: 'Show more',
+                    trimExpandedText: 'Show less',
+                    moreStyle: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: MyConstans.lightBlueSecondary),
+                    lessStyle: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: MyConstans.redColorMain),
                   ),
+                  // Text(
+                  //   widget.product.description ?? 'No Description',
+                  //   softWrap: true,
+                  //   maxLines: 6,
+                  //   overflow: TextOverflow.ellipsis,
+                  //   textAlign: TextAlign.justify,
+                  //   style: const TextStyle(fontSize: 16),
+                  // ),
                 ),
               ),
               const Gap(20),
@@ -173,19 +194,21 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         )),
                     const Gap(10),
                     Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          // Handle Buy Now button press
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: MyConstans.redColorMain,
-                        ),
-                        child: const Text(
-                          'Buy Now',
-                          style: TextStyle(color: Colors.black, fontSize: 20),
-                        ),
-                      ),
-                    ),
+                        child: CusstomBtn(
+                            text: 'Buy Now',
+                            onPressed: () {
+                              // Handle Buy Now button press
+                              showModalBottomSheet(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return PaymentBottomSheet(
+                                    productName: widget.product.name!,
+                                    totalPrice: widget.product.price!,
+                                  );
+                                },
+                              );
+                            },
+                            color: MyConstans.redColorMain)),
                   ],
                 ),
               ),
@@ -216,53 +239,46 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ),
               productsSimilarList == null
                   ? const Loading()
-                  : Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          productsSimilarList!.isEmpty
-                              ? Text(
-                                  "No Similar Poducts",
-                                  style: TextStyle(
-                                    fontSize: 28,
-                                    fontWeight: FontWeight.bold,
-                                    color: MyConstans.lightBlueSecondary,
-                                  ),
-                                )
-                              : Text(
-                                  "Similar Poducts",
-                                  style: TextStyle(
-                                    fontSize: 28,
-                                    fontWeight: FontWeight.bold,
-                                    color: MyConstans.lightBlueSecondary,
-                                  ),
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        productsSimilarList!.isEmpty
+                            ? const Text(
+                                "No Similar Poducts",
+                                style: TextStyle(
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.bold,
+                                  color: MyConstans.lightBlueSecondary,
                                 ),
-                          SizedBox(
-                            height: 200,
-                            // Adjust the height as needed
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: productsSimilarList != null
-                                  ? productsSimilarList!.length
-                                  : 0,
-                              shrinkWrap: true,
-                              itemBuilder: (context, index) {
-                                ProductModel product =
-                                    productsSimilarList![index];
-                                return InkWell(
-                                    onTap: () {
-                                      Navigator.pushNamed(context,
-                                          ProductDetailsScreen.routeName,
-                                          arguments: product);
-                                    },
-                                    child: ProductCard(
-                                        product: productsSimilarList![index]));
-                              },
-                            ),
-                          )
-                        ],
-                      ),
+                              )
+                            : ProductsListViewBuilder(
+                                productsList: productsSimilarList,
+                                text: "Similar Poducts",
+                              ),
+                        /* SizedBox(
+                        height: 200,
+                        // Adjust the height as needed
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: productsSimilarList != null
+                              ? productsSimilarList!.length
+                              : 0,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            ProductModel product =
+                                productsSimilarList![index];
+                            return InkWell(
+                                onTap: () {
+                                  Navigator.pushNamed(context,
+                                      ProductDetailsScreen.routeName,
+                                      arguments: product);
+                                },
+                                child: ProductCard(
+                                    product: productsSimilarList![index]));
+                          },
+                        ),
+                      ) */
+                      ],
                     ),
             ],
           ),

@@ -13,7 +13,7 @@ class AddressBox extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(left: 15, right: 15),
       height: 50,
-      decoration: const BoxDecoration(gradient: MyConstans.appBarGradient),
+      decoration: const BoxDecoration(gradient: MyConstans.addressBoxGradient),
       child: const Row(
         children: [
           Icon(
@@ -29,7 +29,7 @@ class AddressBox extends StatelessWidget {
                     color: MyConstans.text,
                     fontWeight: FontWeight.w900,
                   ))),
-          const Icon(
+           Icon(
             Icons.keyboard_arrow_down_outlined,
             color: MyConstans.yellowPrimary,
           ),

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_store_nodjs/components/myconstans.dart';
-import 'package:flutter_store_nodjs/features/home/screens/product_details_screen.dart';
+import 'package:flutter_store_nodjs/features/details/screens/product_details_screen.dart';
 import 'package:flutter_store_nodjs/features/home/widgets/product_card.dart';
 import 'package:flutter_store_nodjs/models/product_model.dart';
 
-class AllProducts extends StatelessWidget {
-  const AllProducts({
+class ProductsListViewBuilder extends StatelessWidget {
+  const ProductsListViewBuilder({
     super.key,
     required this.productsList,
     required this.text,
@@ -16,21 +16,23 @@ class AllProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double myWidth = MediaQuery.of(context).size.width; // 410
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+         Text(
             text,
             style: const TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.bold,
               color: MyConstans.lightBlueSecondary,
-            ),
+            ) 
           ),
           SizedBox(
-            height: 200,
+            height: myWidth / 1.9,
             // Adjust the height as needed
             child: ListView.builder(
               scrollDirection: Axis.horizontal,

@@ -5,6 +5,7 @@ class ProductModel {
   String? category;
   int? price;
   int? quantity;
+  int? discount;
   List<String>? images;
 
   ProductModel({
@@ -14,6 +15,7 @@ class ProductModel {
     this.category,
     this.price,
     this.quantity,
+    this.discount,
     this.images,
   });
 
@@ -24,6 +26,7 @@ class ProductModel {
     category = json["category"];
     price = json["price"];
     quantity = json["quantity"];
+    discount = json["discount"];
     images = json["images"] == null ? null : List<String>.from(json["images"]);
   }
 
@@ -35,6 +38,7 @@ class ProductModel {
     data["category"] = category;
     data["price"] = price;
     data["quantity"] = quantity;
+    data["discount"] = discount;
     if (images != null) {
       data["images"] = images;
     }

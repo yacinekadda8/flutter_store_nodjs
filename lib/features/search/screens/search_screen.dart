@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_store_nodjs/common/widgets/loading.dart';
-import 'package:flutter_store_nodjs/features/home/screens/product_details_screen.dart';
+import 'package:flutter_store_nodjs/features/details/screens/product_details_screen.dart';
 
 import '../../../models/product_model.dart';
 import '../services/search_services.dart';
@@ -42,7 +42,7 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
       body: searchProductsList != null
           ? searchProductsList!.isEmpty
-              ? Center(child: Text('No products found'))
+              ? const Center(child: Text('No products found'))
               : ListView.builder(
                   itemCount: searchProductsList!.length,
                   itemBuilder: (context, index) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_store_nodjs/features/admin/screens/admin_profile.dart';
 import 'package:flutter_store_nodjs/features/admin/widgets/myadmin_appbar.dart';
 
 import '../../../components/myconstans.dart';
@@ -29,9 +30,10 @@ class _AdminScreenState extends State<AdminScreen> {
   List<Widget> pages = [
     // const HomeScreen(),
     // const Account(),
-    const PostsScreen(),
+    const AdminProductsScreen(),
     const Center(child: Text("analitics")),
-    const Center(child: Text("cart")),
+    const Center(child: Text("orders")),
+    const AdminProfile(),
   ];
 
   @override
@@ -63,6 +65,10 @@ class _AdminScreenState extends State<AdminScreen> {
           bottomNavBarItem(
             icon: Icons.library_add_check_outlined,
             pageNumber: 2,
+          ),
+          bottomNavBarItem(
+            icon: Icons.account_circle_sharp,
+            pageNumber: 3,
           ),
         ],
       ),

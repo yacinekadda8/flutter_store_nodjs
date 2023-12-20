@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_store_nodjs/features/home/screens/home_category_screen.dart';
 import 'package:flutter_store_nodjs/features/search/screens/search_screen.dart';
 import 'package:flutter_store_nodjs/models/product_model.dart';
-import 'features/home/screens/product_details_screen.dart';
+import 'features/details/screens/product_details_screen.dart';
 import 'home.dart';
 import 'features/admin/screens/add_product_screen.dart';
 import 'features/auth/screens/auth_screen.dart';

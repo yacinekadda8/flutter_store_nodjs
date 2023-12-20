@@ -9,14 +9,14 @@ import '../providers/products_provider.dart';
 import '../services/admin_services.dart';
 import '../widgets/product_card.dart';
 
-class PostsScreen extends StatefulWidget {
-  const PostsScreen({super.key});
+class AdminProductsScreen extends StatefulWidget {
+  const AdminProductsScreen({super.key});
 
   @override
-  State<PostsScreen> createState() => _PostsScreenState();
+  State<AdminProductsScreen> createState() => _AdminProductsScreenState();
 }
 
-class _PostsScreenState extends State<PostsScreen> {
+class _AdminProductsScreenState extends State<AdminProductsScreen> {
   List<ProductModel>? products;
   AdminServices adminServices = AdminServices();
 

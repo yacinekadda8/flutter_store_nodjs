@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../models/product_model.dart';
-import 'services/home_services.dart';
 
 class HomeProvider extends ChangeNotifier {
   // final HomeServices homeServices = HomeServices();

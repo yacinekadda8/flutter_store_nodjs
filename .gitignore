@@ -42,6 +42,8 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# for server
+# my dart files
+lib/myconfige.dart
+# my server files
 server/.env
 server/node_modules
