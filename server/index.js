@@ -6,6 +6,7 @@ const dotenv = require("dotenv");
 const authRouter = require('./routes/auth');
 const adminRouter = require('./routes/admin');
 const homeRouter = require('./routes/home');
+const userRouter = require('./routes/user');
 
 dotenv.config();
 // Set variables - Create instances
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use(authRouter);
 app.use(adminRouter);
 app.use(homeRouter);
+app.use(userRouter);
 
 //Connect to MongoDB
 mongoose.connect(MONGODB_URI).then(()=>{
